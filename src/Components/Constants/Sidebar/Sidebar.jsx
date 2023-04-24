@@ -78,22 +78,7 @@ const Sidebar = () => {
               color: colors.grey[100],
             }}
           >
-            {/* {!isCollapsed && (
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-                // ml="15px"
-              >
-                <Typography variant="h4" color={colors.grey[100]}>
-                  ADMIN DASHBOARD
-                </Typography>
-
-                <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
-                  <MoreVertIcon />
-                </IconButton>
-              </Box>
-            )} */}
+        
           </MenuItem>
 
           {!isCollapsed && (
@@ -128,68 +113,10 @@ const Sidebar = () => {
           )}
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-            <Item
+            {/* <Item
               title="Dashboard"
               to="/dashboard"
               icon={<HomeOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              User
-            </Typography>
-            <Item
-              title="Manage Mentor"
-              to="/mentor"
-              icon={<Groups2RoundedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Manage Mentee"
-              to="/mentee"
-              icon={<Groups2RoundedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-              <Item
-              title="Category"
-              to="/category"
-              icon={<CategoryRoundedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-              <Item
-              title="Specialist"
-              to="/specialist"
-              icon={<FolderSpecialRoundedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Calender
-            </Typography>
-            <Item
-              title="Calendar"
-              to="/mentorAvailability"
-              icon={<CalendarTodayOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            {/* <Item
-              title="Slots & Events"
-              to="/fullcalendar"
-              icon={<CalendarMonthTwoToneIcon />}
               selected={selected}
               setSelected={setSelected}
             /> */}
@@ -199,67 +126,41 @@ const Sidebar = () => {
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-              Payment
+              User
             </Typography>
             <Item
-              title="Invoices"
-              to="/paymentTable"
-              icon={<ReceiptOutlinedIcon />}
+              title="Users"
+              to="/category"
+              icon={<CategoryRoundedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
+            <Item
+              title="Leads"
+              to="/mentor"
+              icon={<Groups2RoundedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Service Request"
+              to="/mentee"
+              icon={<Groups2RoundedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+              <Item
+              title="Contact"
+              to="/category"
+              icon={<CategoryRoundedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+           
+             
+          
+        
 
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Report
-            </Typography>
-            <Item
-              title="Reports"
-              to="/reports"
-              icon={<ImportContactsOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Content
-            </Typography>
-            <Item
-              title="About Us"
-              to="/"
-              icon={<InfoOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-
-            <Item
-              title="T&C"
-              to="/"
-              icon={<PersonOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Privacy Policy"
-              to="/"
-              icon={<PrivacyTipOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Contact Us"
-              to="/"
-              icon={<ContactsOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
           </Box>
         </Menu>
       </ProSidebar>

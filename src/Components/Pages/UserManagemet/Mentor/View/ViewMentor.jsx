@@ -3,7 +3,7 @@ import { Box } from "@mui/material";
 import Header from "../../../../Header";
 import "./ViewMentor.css";
 import { Row, Col, Button } from "react-bootstrap";
-import { GetMentorById } from "../../../../Services/API/API";
+// import { GetMentorById } from "../../../../Services/API/API";
 import { useParams, useNavigate } from "react-router-dom";
 import { BASE_URL_IMAGE } from "../../../../Services/host";
 
@@ -13,17 +13,17 @@ const ViewMentor = () => {
 
   //implementation of getMentorById
   const [idData, setIdData] = React.useState([]);
-  const getData = async () => {
-    try {
-      let result = await GetMentorById(id);
-      setIdData(result.data.data);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  useEffect(() => {
-    getData();
-  }, []);
+  // const getData = async () => {
+  //   try {
+  //     let result = await GetMentorById(id);
+  //     setIdData(result.data.data);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
+  // useEffect(() => {
+  //   getData();
+  // }, []);
 
   const navigateToEditFormMentor = (event) => {
     navigate(`/editformMentor/${id}`);

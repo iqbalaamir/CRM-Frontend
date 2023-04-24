@@ -9,11 +9,11 @@ import Header from "../../../Header";
 import { useTheme } from "@mui/material";
 import { tokens } from "../../../../theme";
 import { useNavigate } from "react-router-dom";
-import {
-  GetMentor,
-  DeleteMentor,
-  ChangeUserStatus,
-} from "../../../Services/API/API";
+// import {
+//   GetMentor,
+//   DeleteMentor,
+//   ChangeUserStatus,
+// } from "../../../Services/API/API";
 
 const Mentor = () => {
   const [userId, setUserId] = useState([]);
@@ -28,25 +28,25 @@ const Mentor = () => {
     const value = event.target.value;
     const data = { response: value };
     const arr = [...id];
-    let status = await ChangeUserStatus(
-      arr,
-      data,
-      localStorage.getItem("adminToken")
-    );
-    setSelectValue(value);
+    // let status = await ChangeUserStatus(
+    //   arr,
+    //   data,
+    //   localStorage.getItem("adminToken")
+    // );
+    // setSelectValue(value);
   };
 
-  const getData = async () => {
-    try {
-      let result = await GetMentor(localStorage.getItem("adminToken"));
-      setMentorData(result.data.data);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  useEffect(() => {
-    getData();
-  }, []);
+  // const getData = async () => {
+  //   try {
+  //     let result = await GetMentor(localStorage.getItem("adminToken"));
+  //     setMentorData(result.data.data);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
+  // useEffect(() => {
+  //   getData();
+  // }, []);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [anchorEl, setAnchorEl] = React.useState();
@@ -90,50 +90,50 @@ const Mentor = () => {
     navigate(`/changeMentorPassword/${value}`);
   };
 
-  const removeMentor = async (id) => {
-    const confirmed = window.confirm(
-      "Do you really want to delete this mentor?"
-    );
-    if (!confirmed) return;
+  // const removeMentor = async (id) => {
+  //   const confirmed = window.confirm(
+  //     "Do you really want to delete this mentor?"
+  //   );
+  //   if (!confirmed) return;
 
-    try {
-      const arr = [...id];
-      const result = await DeleteMentor(
-        arr,
-        localStorage.getItem("adminToken")
-      );
-      toast.success("Mentor deleted successfully!", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-      setTimeout(() => {
-        navigate("/mentor");
-      }, 3000);
-    } catch (error) {
-      if (error.response.status == 401) {
-        toast.error("Token expired", {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-      }
-      localStorage.removeItem("adminToken");
-      setTimeout(() => {
-        navigate("/login");
-      }, 3000);
-    }
-  };
+  //   try {
+  //     const arr = [...id];
+  //     const result = await DeleteMentor(
+  //       arr,
+  //       localStorage.getItem("adminToken")
+  //     );
+  //     toast.success("Mentor deleted successfully!", {
+  //       position: "top-right",
+  //       autoClose: 2000,
+  //       hideProgressBar: false,
+  //       closeOnClick: true,
+  //       pauseOnHover: true,
+  //       draggable: true,
+  //       progress: undefined,
+  //       theme: "light",
+  //     });
+  //     setTimeout(() => {
+  //       navigate("/mentor");
+  //     }, 3000);
+  //   } catch (error) {
+  //     if (error.response.status == 401) {
+  //       toast.error("Token expired", {
+  //         position: "top-right",
+  //         autoClose: 2000,
+  //         hideProgressBar: false,
+  //         closeOnClick: true,
+  //         pauseOnHover: true,
+  //         draggable: true,
+  //         progress: undefined,
+  //         theme: "light",
+  //       });
+  //     }
+  //     localStorage.removeItem("adminToken");
+  //     setTimeout(() => {
+  //       navigate("/login");
+  //     }, 3000);
+  //   }
+  // };
 
   const columns: GridColDef[] = useMemo(() => [
     { field: "id", headerName: "ID", width: 100 },
@@ -241,7 +241,11 @@ const Mentor = () => {
                 Edit
               </MenuItem>
               <MenuItem onClick={() => navigateToViewMentor()}>View</MenuItem>
-              <MenuItem onClick={() => removeMentor(userId)}>Delete</MenuItem>
+              <MenuItem
+              // onClick={() => removeMentor(userId)}
+              >
+                Delete
+              </MenuItem>
             </Menu>
           </div>
         );

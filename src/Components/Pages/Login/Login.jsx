@@ -3,9 +3,10 @@ import "./Login.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AdminLogin } from "../../Services/API/API";
 import { AuthContext } from "../../Context/Auth/AuthContext";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Button } from "react-bootstrap";
 import {
   MDBContainer,
   MDBCard,
@@ -16,9 +17,10 @@ import {
   MDBIcon,
   MDBInput,
 } from "mdb-react-ui-kit";
-const LoginPageImage = "https://www.kapturecrm.com/images/crm-info/banner-image.png";
-const logo = "https://media.istockphoto.com/id/1316205005/vector/crm-customer-relationship-management-software-structure-module-workflow-vector-icons.jpg?s=612x612&w=0&k=20&c=o2NspngPWa6R_-vR_5Uuk1wpzReqAGIh98Xx5TxTLl8=";
-import { Button } from "react-bootstrap";
+const LoginPageImage =
+  "https://www.kapturecrm.com/images/crm-info/banner-image.png";
+const logo =
+  "https://media.istockphoto.com/id/1316205005/vector/crm-customer-relationship-management-software-structure-module-workflow-vector-icons.jpg?s=612x612&w=0&k=20&c=o2NspngPWa6R_-vR_5Uuk1wpzReqAGIh98Xx5TxTLl8=";
 
 const Login = () => {
   // const navigate = useNavigate();
@@ -39,7 +41,6 @@ const Login = () => {
     setOpen(false);
   };
 
-
   const { LoadUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -58,12 +59,12 @@ const Login = () => {
 
       let result = await Login(formData);
 
-      if (result.data.accessToken != null && result.data.accessToken == undefined) {
-        localStorage.setItem(
-          "adminToken",
-          result.data.accessToken
-        );
-        
+      if (
+        result.data.accessToken != null &&
+        result.data.accessToken == undefined
+      ) {
+        localStorage.setItem("adminToken", result.data.accessToken);
+
         setTimeout(() => {
           navigate("/dashboard");
         }, 3000);

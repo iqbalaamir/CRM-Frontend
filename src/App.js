@@ -4,11 +4,9 @@ import { Routes, Route, useLocation, useParams } from "react-router-dom";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import Login from "./Components/Pages/Login/Login";
-import Dashboard from "./Components/Pages/Dashboard/Dasboard";
 import Sidebar from "./Components/Constants/Sidebar/Sidebar";
 import Navbar from "./Components/Constants/Navbar/Navbar";
 import Mentor from "./Components/Pages/UserManagemet/Mentor/Mentor";
-import Calendar from "./Components/Pages/Calendar/Calendar/Calendar";
 import Mentee from "./Components/Pages/UserManagemet/Mentee/Mentee";
 import ProtectedRoutes from "./Components/Protected/ProtectedRoutes";
 import NewFormMentor from "./Components/Pages/UserManagemet/Mentor/Form/NewForm/NewFormMentor";
@@ -17,26 +15,15 @@ import NewFormMentee from "./Components/Pages/UserManagemet/Mentee/Form/NewForm/
 import EditFormMentee from "./Components/Pages/UserManagemet/Mentee/Form/EditForm/EditFormMentee";
 import ViewMentor from "./Components/Pages/UserManagemet/Mentor/View/ViewMentor";
 import ViewMentee from "./Components/Pages/UserManagemet/Mentee/View/ViewMentee";
-import FullCalendar from "./Components/Pages/Calendar/Full Calendar/FullCalendar";
 import ChangePassword from "./Components/Pages/Admin Management/Change Password/changePassword";
 import AdminProfile from "./Components/Pages/Admin Management/Admins Profile/AdminProfile";
 import AdminUser from "./Components/Pages/Admin Management/Admin Add User/AdminUser";
-import Reports from "./Components/Pages/Report Management/Reports";
 import EditAdminProfile from "./Components/Pages/Admin Management/Admins Profile/EditAdminProfile";
-import EditEvent from "./Components/Pages/Calendar/EditEvent/EditEvent";
 import EditAdminUser from "./Components/Pages/Admin Management/Admin Add User/EditAdminUser";
 import CreateAdminUser from "./Components/Pages/Admin Management/Admin Add User/CreateAdminUser";
-import MentorReport from "./Components/Pages/Report Management/MentorsReport/MentorReport";
-import MenteeReport from "./Components/Pages/Report Management/MenteesReport/MenteeReport";
-import PaymentReport from "./Components/Pages/Report Management/PaymentReport/PaymentReport";
-import CallTranscript from "./Components/Pages/Report Management/CallTranscript/CallTranscript";
-import PaymentTable from "./Components/Pages/PaymentManagement/PaymentTable/PaymentTable";
 import Temp from "./Components/Temp/Temp";
-import PaymentInvoices from "./Components/Pages/PaymentManagement/PaymentInvoices/PaymentInvoices";
-import MentorsShift from "./Components/Pages/Calendar/MentorsShift/MentorsShift";
 import Category from "./Components/Pages/UserManagemet/Category/Category";
 import Specialist from "./Components/Pages/UserManagemet/Specialist/Specialist";
-import Payment from "./Components/Pages/Payment/Payment";
 import AddSpeciality from "./Components/Pages/UserManagemet/Specialist/AddSpeciality";
 import EditSpeciality from "./Components/Pages/UserManagemet/Specialist/EditSpeciality";
 import SendMail from "./Components/Pages/Admin Management/ForgetPassword/SendMail/SendMail";
@@ -44,20 +31,16 @@ import ForgetPassword from "./Components/Pages/Admin Management/ForgetPassword/F
 import AddCategory from "./Components/Pages/UserManagemet/Category/AddCategory";
 import EditCategory from "./Components/Pages/UserManagemet/Category/EditCategory";
 import AddPermissions from "./Components/Pages/Admin Management/Admin Add User/AddPermissions";
-import MentorAvailability from "./Components/Pages/Calendar/Mentor Avaialability/MentorAvailability";
 
 function App() {
   let { userId } = useParams();
   const allPaths = [
     "/",
-    "/payment",
-    "/CheckoutForm",
     "/login",
     "/dashboard",
     "/navbar",
     "/mentor",
     "/mentee",
-    "/calendar",
     "/newformMentor",
     "/editformMentor",
     "/newformMentee",
@@ -71,16 +54,8 @@ function App() {
     "/adminAddUser",
     "/reports",
     "/editAdminProfile",
-    "/editEvent",
     "/editAdminUser",
     "/createAdminUser",
-    "/mentorReport",
-    "/menteeReport",
-    "/paymentReport",
-    "/callTranscript",
-    "/paymentTable",
-    "/paymentInvoices",
-    "/mentorsShift",
     "/changeMentorPassword",
     "/changeMenteePassword",
     "/specialist",
@@ -89,7 +64,7 @@ function App() {
     "/editSpeciality",
     "/editCategory",
     "/addCategory",
-    "/addPermissions"
+    "/addPermissions",
   ];
   const { pathname } = useLocation();
   const [theme, colorMode] = useMode();
@@ -116,24 +91,6 @@ function App() {
             {/*  */}
 
             <Routes>
-              <Route
-                exact
-                path="/dashboard"
-                element={
-                  <ProtectedRoutes Component={Dashboard}>
-                    <Dashboard />
-                  </ProtectedRoutes>
-                }
-              />
-              <Route
-                exact
-                path="/"
-                element={
-                  <ProtectedRoutes Component={Dashboard}>
-                    <Dashboard />
-                  </ProtectedRoutes>
-                }
-              />
               <Route exact path="/login" element={<Login />} />
               <Route
                 exact
@@ -149,15 +106,7 @@ function App() {
                   </ProtectedRoutes>
                 }
               />
-              <Route
-                exact
-                path="/payment"
-                element={
-                  <ProtectedRoutes Component={Payment}>
-                    <Payment />
-                  </ProtectedRoutes>
-                }
-              />
+
               {/* <Route
                 exact
                 path="/CheckoutForm"
@@ -167,15 +116,7 @@ function App() {
                   </ProtectedRoutes>
                 }
               /> */}
-              <Route
-                exact
-                path="/editEvent"
-                element={
-                  <ProtectedRoutes Component={EditEvent}>
-                    <EditEvent />
-                  </ProtectedRoutes>
-                }
-              />
+
               <Route
                 exact
                 path="/mentor"
@@ -221,7 +162,7 @@ function App() {
                   </ProtectedRoutes>
                 }
               />
-         
+
               <Route
                 exact
                 path="/newformMentee"
@@ -304,42 +245,7 @@ function App() {
                   </ProtectedRoutes>
                 }
               />
-              <Route
-                exact
-                path="/mentorAvailability"
-                element={
-                  <ProtectedRoutes Component={MentorAvailability}>
-                    <MentorAvailability />
-                  </ProtectedRoutes>
-                }
-              />
-              <Route
-                exact
-                path="/mentorsShift"
-                element={
-                  <ProtectedRoutes Component={MentorsShift}>
-                    <MentorsShift />
-                  </ProtectedRoutes>
-                }
-              />
-              <Route
-                exact
-                path="/calendar/:id"
-                element={
-                  <ProtectedRoutes Component={Calendar}>
-                    <Calendar />
-                  </ProtectedRoutes>
-                }
-              />
-              <Route
-                exact
-                path="/fullcalendar"
-                element={
-                  <ProtectedRoutes Component={FullCalendar}>
-                    <FullCalendar />
-                  </ProtectedRoutes>
-                }
-              />
+
               <Route
                 exact
                 path="/myprofile"
@@ -405,69 +311,6 @@ function App() {
                 }
               />
 
-              <Route
-                exact
-                path="/reports"
-                element={
-                  <ProtectedRoutes Component={Reports}>
-                    <Reports />
-                  </ProtectedRoutes>
-                }
-              />
-              <Route
-                exact
-                path="/mentorReport"
-                element={
-                  <ProtectedRoutes Component={MentorReport}>
-                    <MentorReport />
-                  </ProtectedRoutes>
-                }
-              />
-              <Route
-                exact
-                path="/menteeReport"
-                element={
-                  <ProtectedRoutes Component={MenteeReport}>
-                    <MenteeReport />
-                  </ProtectedRoutes>
-                }
-              />
-              <Route
-                exact
-                path="/paymentReport"
-                element={
-                  <ProtectedRoutes Component={PaymentReport}>
-                    <PaymentReport />
-                  </ProtectedRoutes>
-                }
-              />
-              <Route
-                exact
-                path="/callTranscript"
-                element={
-                  <ProtectedRoutes Component={CallTranscript}>
-                    <CallTranscript />
-                  </ProtectedRoutes>
-                }
-              />
-              <Route
-                exact
-                path="/paymentTable"
-                element={
-                  <ProtectedRoutes Component={PaymentTable}>
-                    <PaymentTable />
-                  </ProtectedRoutes>
-                }
-              />
-              <Route
-                exact
-                path="/paymentInvoices"
-                element={
-                  <ProtectedRoutes Component={PaymentInvoices}>
-                    <PaymentInvoices />
-                  </ProtectedRoutes>
-                }
-              />
               <Route
                 exact
                 path="/ForgetPassword"
