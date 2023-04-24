@@ -1,0 +1,37 @@
+/* .table{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+} */
+
+.form_permission_control {
+    border-radius: 5px;
+    height: 40px;
+    font-size: 0.825rem;
+}
+
+.permission_form_lable {
+    font-weight: bold;
+}
+
+.add_permissions_button {
+    margin-top: 25px;
+}
+
+.permission_button {
+    margin-left: 2px !important;
+}
+
+
+.create_admin_form_control {
+    border-radius: 5px;
+    height: 40px;
+    border: 1px solid;
+    /* font-size: 0.825rem; */
+}
+
+.create_admin_button {
+    margin-top: 20px;
+}
+
+.submit_admin_button {
+    margin-left: 2px !important;
+}

@@ -1,0 +1,75 @@
+.tableIcon {
+    padding: 2px;
+    size: 20%;
+    font-size: x-large;
+}
+
+.add_mentor_button:hover {
+    background-color: #FED604 !important;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    transform: translateY(-7px);
+
+}
+
+.tabledata {
+    height: 640px;
+    width: 100%;
+    align-items: center;
+    margin-left: 1.5%;
+    margin-top: 3.5%;
+    margin: initial;
+    font-size: 80px;
+    color: black;
+    text-align: center;
+}
+
+
+.MuiDataGrid-columnHeadersInner  {
+    background-color: #F2F0F0 !important;
+    color: black;
+    font-size: large;
+}
+
+.MuiDataGrid-footerContainer  {
+    background-color: #F2F0F0 !important;
+    color: black !important;
+}
+
+.MuiDataGrid-cellContent {
+    font-size: 15px;
+    text-align: center;
+}
+
+.css-hpjhlg-MuiTablePagination-root .MuiTablePagination-selectLabel {
+    font-size: 13px !important;
+    color: black;
+    margin-bottom: 0px !important
+}
+
+.MuiTablePagination-displayedRows {
+    color: black;
+    margin-bottom: 0px !important
+}
+
+.mentor_action_button:hover{
+    color: var(--primary);
+}
+
+.mentor_change_pwd:hover{
+    background-color: #6772c2 !important;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.change_password_button{
+    margin:5px
+}
+
+.button{
+    margin-top: 20px;
+}
+
+.form_lable{
+    border-left-width: thick;
+    width: 38%;
+}

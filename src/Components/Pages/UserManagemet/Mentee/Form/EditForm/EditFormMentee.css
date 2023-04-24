@@ -1,0 +1,11 @@
+.Mentee_edit_form{
+    /* margin: 20px; */
+    width:70%;
+    margin-left: 13%;
+}
+
+.form_control{
+    /* border-bottom: 3px #2D3A96 solid !important; */
+    height: 40px !important;
+    border-radius: 5px !important;
+}

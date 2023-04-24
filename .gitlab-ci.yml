@@ -1,0 +1,12 @@
+stages:
+  - deploy
+
+deploy:
+  stage: deploy
+  script:
+    - git pull
+    - npm install
+    - npm run build
+    - sudo rsync -avz --delete build/ root@82.180.131.48:/home/blockcod/public_html/
+  only:
+    - master

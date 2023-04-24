@@ -1,0 +1,45 @@
+.payment_invoice_card_1{
+    height: 320px;
+    background-color: #4B6ECA;
+    padding-top: 1.25rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+}
+
+.payment_invoice_card_2{
+    height: 150px;
+    background-color: #FFA857;
+
+}
+.payment_invoice_card_3{
+    height: 150px;
+    background-color: #6BE169;
+
+}
+.payment_invoice_card_4{
+    height: 150px;
+    background-color: #AD88CD;
+
+}
+
+
+.row_1{
+    margin-bottom: 20px;
+}
+.row_2{
+    margin-bottom: 20px;
+}
+
+.card_1_background_img{
+    width: 300px;
+}
+
+.balance_count{
+    display: flex;
+}
+
+.balance_title{
+    margin-bottom: 20px;
+    color: white;
+    font-size: 35px;
+}

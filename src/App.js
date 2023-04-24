@@ -1,0 +1,516 @@
+import "./App.css";
+import { React, useState } from "react";
+import { Routes, Route, useLocation, useParams } from "react-router-dom";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { ColorModeContext, useMode } from "./theme";
+import Login from "./Components/Pages/Login/Login";
+import Dashboard from "./Components/Pages/Dashboard/Dasboard";
+import Sidebar from "./Components/Constants/Sidebar/Sidebar";
+import Navbar from "./Components/Constants/Navbar/Navbar";
+import Mentor from "./Components/Pages/UserManagemet/Mentor/Mentor";
+import Calendar from "./Components/Pages/Calendar/Calendar/Calendar";
+import Mentee from "./Components/Pages/UserManagemet/Mentee/Mentee";
+import ProtectedRoutes from "./Components/Protected/ProtectedRoutes";
+import NewFormMentor from "./Components/Pages/UserManagemet/Mentor/Form/NewForm/NewFormMentor";
+import EditFormMentor from "./Components/Pages/UserManagemet/Mentor/Form/EditForm/EditFormMentor";
+import NewFormMentee from "./Components/Pages/UserManagemet/Mentee/Form/NewForm/NewFormMentee";
+import EditFormMentee from "./Components/Pages/UserManagemet/Mentee/Form/EditForm/EditFormMentee";
+import ViewMentor from "./Components/Pages/UserManagemet/Mentor/View/ViewMentor";
+import ViewMentee from "./Components/Pages/UserManagemet/Mentee/View/ViewMentee";
+import FullCalendar from "./Components/Pages/Calendar/Full Calendar/FullCalendar";
+import ChangePassword from "./Components/Pages/Admin Management/Change Password/changePassword";
+import AdminProfile from "./Components/Pages/Admin Management/Admins Profile/AdminProfile";
+import AdminUser from "./Components/Pages/Admin Management/Admin Add User/AdminUser";
+import Reports from "./Components/Pages/Report Management/Reports";
+import EditAdminProfile from "./Components/Pages/Admin Management/Admins Profile/EditAdminProfile";
+import EditEvent from "./Components/Pages/Calendar/EditEvent/EditEvent";
+import EditAdminUser from "./Components/Pages/Admin Management/Admin Add User/EditAdminUser";
+import CreateAdminUser from "./Components/Pages/Admin Management/Admin Add User/CreateAdminUser";
+import MentorReport from "./Components/Pages/Report Management/MentorsReport/MentorReport";
+import MenteeReport from "./Components/Pages/Report Management/MenteesReport/MenteeReport";
+import PaymentReport from "./Components/Pages/Report Management/PaymentReport/PaymentReport";
+import CallTranscript from "./Components/Pages/Report Management/CallTranscript/CallTranscript";
+import PaymentTable from "./Components/Pages/PaymentManagement/PaymentTable/PaymentTable";
+import Temp from "./Components/Temp/Temp";
+import PaymentInvoices from "./Components/Pages/PaymentManagement/PaymentInvoices/PaymentInvoices";
+import MentorsShift from "./Components/Pages/Calendar/MentorsShift/MentorsShift";
+import Category from "./Components/Pages/UserManagemet/Category/Category";
+import Specialist from "./Components/Pages/UserManagemet/Specialist/Specialist";
+import Payment from "./Components/Pages/Payment/Payment";
+import AddSpeciality from "./Components/Pages/UserManagemet/Specialist/AddSpeciality";
+import EditSpeciality from "./Components/Pages/UserManagemet/Specialist/EditSpeciality";
+import SendMail from "./Components/Pages/Admin Management/ForgetPassword/SendMail/SendMail";
+import ForgetPassword from "./Components/Pages/Admin Management/ForgetPassword/ForgetPassword/ForgetPassword";
+import AddCategory from "./Components/Pages/UserManagemet/Category/AddCategory";
+import EditCategory from "./Components/Pages/UserManagemet/Category/EditCategory";
+import AddPermissions from "./Components/Pages/Admin Management/Admin Add User/AddPermissions";
+import MentorAvailability from "./Components/Pages/Calendar/Mentor Avaialability/MentorAvailability";
+
+function App() {
+  let { userId } = useParams();
+  const allPaths = [
+    "/",
+    "/payment",
+    "/CheckoutForm",
+    "/login",
+    "/dashboard",
+    "/navbar",
+    "/mentor",
+    "/mentee",
+    "/calendar",
+    "/newformMentor",
+    "/editformMentor",
+    "/newformMentee",
+    "/editformMentee",
+    "/viewMentor",
+    "/viewMentee",
+    "/mentorAvailability",
+    "/fullcalendar",
+    "/myprofile",
+    "/changepassword",
+    "/adminAddUser",
+    "/reports",
+    "/editAdminProfile",
+    "/editEvent",
+    "/editAdminUser",
+    "/createAdminUser",
+    "/mentorReport",
+    "/menteeReport",
+    "/paymentReport",
+    "/callTranscript",
+    "/paymentTable",
+    "/paymentInvoices",
+    "/mentorsShift",
+    "/changeMentorPassword",
+    "/changeMenteePassword",
+    "/specialist",
+    "/addSpeciality",
+    "/category",
+    "/editSpeciality",
+    "/editCategory",
+    "/addCategory",
+    "/addPermissions"
+  ];
+  const { pathname } = useLocation();
+  const [theme, colorMode] = useMode();
+  const [isSidebar, setIsSidebar] = useState(true);
+
+  return (
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <div className="app">
+          {pathname === "/login" ? null : allPaths.includes(
+              "/" + pathname.split("/")[1]
+            ) === true ? (
+            <Sidebar isSidebar={isSidebar} />
+          ) : null}
+
+          <main className="content">
+            {pathname === "/login" ? null : allPaths.includes(
+                "/" + pathname.split("/")[1]
+              ) === true ? (
+              <Navbar setIsSidebar={setIsSidebar} />
+            ) : null}
+
+            {/*  */}
+
+            <Routes>
+              <Route
+                exact
+                path="/dashboard"
+                element={
+                  <ProtectedRoutes Component={Dashboard}>
+                    <Dashboard />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/"
+                element={
+                  <ProtectedRoutes Component={Dashboard}>
+                    <Dashboard />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route exact path="/login" element={<Login />} />
+              <Route
+                exact
+                path="/forgetPassword"
+                element={<ForgetPassword />}
+              />
+              <Route
+                exact
+                path="/navbar"
+                element={
+                  <ProtectedRoutes Component={Navbar}>
+                    <Navbar />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/payment"
+                element={
+                  <ProtectedRoutes Component={Payment}>
+                    <Payment />
+                  </ProtectedRoutes>
+                }
+              />
+              {/* <Route
+                exact
+                path="/CheckoutForm"
+                element={
+                  <ProtectedRoutes Component={CheckoutForm}>
+                    <CheckoutForm />
+                  </ProtectedRoutes>
+                }
+              /> */}
+              <Route
+                exact
+                path="/editEvent"
+                element={
+                  <ProtectedRoutes Component={EditEvent}>
+                    <EditEvent />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/mentor"
+                element={
+                  <ProtectedRoutes Component={Mentor}>
+                    <Mentor />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/mentee"
+                element={
+                  <ProtectedRoutes Component={Mentee}>
+                    <Mentee />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/newformMentor"
+                element={
+                  <ProtectedRoutes Component={NewFormMentor}>
+                    <NewFormMentor />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/editformMentor/:id"
+                element={
+                  <ProtectedRoutes Component={EditFormMentor}>
+                    <EditFormMentor />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/viewMentor/:id"
+                element={
+                  <ProtectedRoutes Component={ViewMentor}>
+                    <ViewMentor />
+                  </ProtectedRoutes>
+                }
+              />
+         
+              <Route
+                exact
+                path="/newformMentee"
+                element={
+                  <ProtectedRoutes Component={NewFormMentee}>
+                    <NewFormMentee />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/editformMentee/:id"
+                element={
+                  <ProtectedRoutes Component={EditFormMentee}>
+                    <EditFormMentee />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/viewMentee/:id"
+                element={
+                  <ProtectedRoutes Component={ViewMentee}>
+                    <ViewMentee />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/category"
+                element={
+                  <ProtectedRoutes Component={Category}>
+                    <Category />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/addCategory"
+                element={
+                  <ProtectedRoutes Component={AddCategory}>
+                    <AddCategory />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/editCategory/:id"
+                element={
+                  <ProtectedRoutes Component={EditCategory}>
+                    <EditCategory />
+                  </ProtectedRoutes>
+                }
+              />
+
+              <Route
+                exact
+                path="/specialist"
+                element={
+                  <ProtectedRoutes Component={Specialist}>
+                    <Specialist />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/addSpeciality"
+                element={
+                  <ProtectedRoutes Component={AddSpeciality}>
+                    <AddSpeciality />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/editSpeciality"
+                element={
+                  <ProtectedRoutes Component={EditSpeciality}>
+                    <EditSpeciality />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/mentorAvailability"
+                element={
+                  <ProtectedRoutes Component={MentorAvailability}>
+                    <MentorAvailability />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/mentorsShift"
+                element={
+                  <ProtectedRoutes Component={MentorsShift}>
+                    <MentorsShift />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/calendar/:id"
+                element={
+                  <ProtectedRoutes Component={Calendar}>
+                    <Calendar />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/fullcalendar"
+                element={
+                  <ProtectedRoutes Component={FullCalendar}>
+                    <FullCalendar />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/myprofile"
+                element={
+                  <ProtectedRoutes Component={AdminProfile}>
+                    <AdminProfile />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/editAdminProfile"
+                element={
+                  <ProtectedRoutes Component={EditAdminProfile}>
+                    <EditAdminProfile />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/changepassword"
+                element={
+                  <ProtectedRoutes Component={ChangePassword}>
+                    <ChangePassword />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/adminAddUser"
+                element={
+                  <ProtectedRoutes Component={AdminUser}>
+                    <AdminUser />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/editAdminUser"
+                element={
+                  <ProtectedRoutes Component={EditAdminUser}>
+                    <EditAdminUser />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/createAdminUser"
+                element={
+                  <ProtectedRoutes Component={CreateAdminUser}>
+                    <CreateAdminUser />
+                  </ProtectedRoutes>
+                }
+              />
+
+              <Route
+                exact
+                path="/addPermissions"
+                element={
+                  <ProtectedRoutes Component={AddPermissions}>
+                    <AddPermissions />
+                  </ProtectedRoutes>
+                }
+              />
+
+              <Route
+                exact
+                path="/reports"
+                element={
+                  <ProtectedRoutes Component={Reports}>
+                    <Reports />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/mentorReport"
+                element={
+                  <ProtectedRoutes Component={MentorReport}>
+                    <MentorReport />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/menteeReport"
+                element={
+                  <ProtectedRoutes Component={MenteeReport}>
+                    <MenteeReport />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/paymentReport"
+                element={
+                  <ProtectedRoutes Component={PaymentReport}>
+                    <PaymentReport />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/callTranscript"
+                element={
+                  <ProtectedRoutes Component={CallTranscript}>
+                    <CallTranscript />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/paymentTable"
+                element={
+                  <ProtectedRoutes Component={PaymentTable}>
+                    <PaymentTable />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/paymentInvoices"
+                element={
+                  <ProtectedRoutes Component={PaymentInvoices}>
+                    <PaymentInvoices />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/ForgetPassword"
+                element={
+                  <ProtectedRoutes Component={ForgetPassword}>
+                    <ForgetPassword />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/forgetPassword"
+                element={
+                  <ProtectedRoutes Component={ForgetPassword}>
+                    <ForgetPassword />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/SendMail"
+                element={
+                  <ProtectedRoutes Component={SendMail}>
+                    <SendMail />
+                  </ProtectedRoutes>
+                }
+              />
+
+              <Route
+                exact
+                path="*"
+                element={
+                  <ProtectedRoutes Component={Temp}>
+                    <Temp />
+                  </ProtectedRoutes>
+                }
+              />
+            </Routes>
+          </main>
+        </div>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
+  );
+}
+
+export default App;

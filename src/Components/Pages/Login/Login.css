@@ -1,0 +1,74 @@
+.login_form_container {
+  max-width: 1100px !important;
+  min-width: 1000px !important;
+  /* padding-left: 100px !important;
+  padding-right: 100px !important; */
+  /* margin-top: 240px !important; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* margin:0 auto; */
+  height: 100vh;
+}
+
+.login_logo {
+  margin-left: 30px;
+  font-weight: 200px !important;
+}
+
+.login_form_heading {
+  margin-left: 90px;
+}
+
+.login_forget_pwd{
+  margin-left: 90px;
+  font-weight: 200px;
+  font-size: medium;
+}
+
+
+.login_form_card {
+  width: 70%;
+  border-radius: 20px !important;
+  /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+
+.login_form_button {
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  background-color: var(--primary);
+  color: white;
+  margin-bottom: 4px;
+  margin-top: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  /* width: 140px; */
+  height: 45px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  text-transform: uppercase;
+  border: none;
+
+}
+
+.login_form_button:hover {
+  background-color: #6e77be;
+  box-shadow: 0px 15px 20px rgba(123, 125, 204, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+
+}
+
+.admiin_forgetpwd_button{
+  border: none !important;
+  background-color: white !important ;
+  color: blue !important;
+}
+
+.admiin_forgetpwd_button:hover{
+  color: darkblue !important;
+}

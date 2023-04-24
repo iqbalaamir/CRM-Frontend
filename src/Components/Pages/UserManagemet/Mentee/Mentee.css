@@ -1,0 +1,24 @@
+.tableIcon{
+
+    padding: 2px;
+    size: 20%;
+    font-size: x-large;
+}
+.tabledata{
+    height: 440px;
+    width: 100%;
+    align-items: center;
+    margin-left: 1.5%;
+    margin-top: 3.5%;
+    margin: initial;
+}
+   
+
+.css-f3jnds-MuiDataGrid-columnHeaders{
+    background-color: #a4a9fc;
+}
+.css-17jjc08-MuiDataGrid-footerContainer{
+    background-color: #a4a9fc;
+}
+
+

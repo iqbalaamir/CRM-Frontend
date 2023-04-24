@@ -1,0 +1,28 @@
+.add_specialist_button:hover{
+    background-color: #9298f0;
+}
+
+.speciality_edit:hover{
+    color: #2D3A96;
+}
+
+.speciality_edit_button{
+    margin:5px
+}
+
+.button{
+    margin-top: 20px;
+}
+
+.category-icon-preview{
+    height: 100px;
+    width: 100px;
+    margin-top: 20px;
+    margin-left: 2px;
+}
+
+.category_form_control{
+    /* border-bottom: 3px #2D3A96 solid !important; */
+    height: 35px !important;
+    border-radius: 5px !important;
+}

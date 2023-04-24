@@ -1,0 +1,28 @@
+.sidebar_container {
+    height: auto;
+    /* position: fixed; */
+    /* overflow-y: hidden;
+    overflow-x: hidden; */
+    
+}
+
+@media only screen and (max-width: 600px) {
+    .MuiTypography-root {
+        margin: 15px 0px 5px 0px !important;
+    }
+
+    .MuiBox-root {
+        text-align: -webkit-center;
+    }
+}
+
+.icon_theme {
+    margin: 20px;
+    margin-top: 62px;
+
+}
+
+.icon {
+    font-size: 25px;
+    color: black;
+}

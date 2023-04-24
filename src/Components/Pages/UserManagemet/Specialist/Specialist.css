@@ -1,0 +1,15 @@
+.add_specialist_button:hover{
+    background-color: #9298f0;
+}
+
+.speciality_edit:hover{
+    color: #2D3A96;
+}
+
+.speciality_edit_button{
+    margin:5px
+}
+
+.button{
+    margin-top: 20px;
+}
