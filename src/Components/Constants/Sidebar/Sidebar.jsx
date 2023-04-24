@@ -130,29 +130,29 @@ const Sidebar = () => {
             </Typography>
             <Item
               title="Users"
-              to="/category"
-              icon={<CategoryRoundedIcon />}
+              to="/users"
+              icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Leads"
-              to="/mentor"
+              to="/lead"
               icon={<Groups2RoundedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Service Request"
-              to="/mentee"
-              icon={<Groups2RoundedIcon />}
+              to="/service"
+              icon={<PrivacyTipOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
               <Item
               title="Contact"
-              to="/category"
-              icon={<CategoryRoundedIcon />}
+              to="/contact"
+              icon={<ContactsOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />

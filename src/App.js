@@ -21,7 +21,6 @@ import AdminUser from "./Components/Pages/Admin Management/Admin Add User/AdminU
 import EditAdminProfile from "./Components/Pages/Admin Management/Admins Profile/EditAdminProfile";
 import EditAdminUser from "./Components/Pages/Admin Management/Admin Add User/EditAdminUser";
 import CreateAdminUser from "./Components/Pages/Admin Management/Admin Add User/CreateAdminUser";
-import Temp from "./Components/Temp/Temp";
 import Category from "./Components/Pages/UserManagemet/Category/Category";
 import Specialist from "./Components/Pages/UserManagemet/Specialist/Specialist";
 import AddSpeciality from "./Components/Pages/UserManagemet/Specialist/AddSpeciality";
@@ -31,6 +30,12 @@ import ForgetPassword from "./Components/Pages/Admin Management/ForgetPassword/F
 import AddCategory from "./Components/Pages/UserManagemet/Category/AddCategory";
 import EditCategory from "./Components/Pages/UserManagemet/Category/EditCategory";
 import AddPermissions from "./Components/Pages/Admin Management/Admin Add User/AddPermissions";
+import User from "./Components/Pages/User/User";
+import EditUser from "./Components/Pages/User/EditUser/EditUser";
+import AddUser from "./Components/Pages/User/AddUser/AddUser";
+import Lead from "./Components/Pages/Lead/Lead";
+import EditLead from "./Components/Pages/Lead/EditLead/EditLead";
+import AddLead from "./Components/Pages/Lead/AddLead/AddLead";
 
 function App() {
   let { userId } = useParams();
@@ -39,14 +44,6 @@ function App() {
     "/login",
     "/dashboard",
     "/navbar",
-    "/mentor",
-    "/mentee",
-    "/newformMentor",
-    "/editformMentor",
-    "/newformMentee",
-    "/editformMentee",
-    "/viewMentor",
-    "/viewMentee",
     "/mentorAvailability",
     "/fullcalendar",
     "/myprofile",
@@ -65,6 +62,12 @@ function App() {
     "/editCategory",
     "/addCategory",
     "/addPermissions",
+    "/users",
+    "/EditUsers",
+    "/addUser",
+    "/lead",
+    "/EditLead",
+    "/AddLead"
   ];
   const { pathname } = useLocation();
   const [theme, colorMode] = useMode();
@@ -106,16 +109,61 @@ function App() {
                   </ProtectedRoutes>
                 }
               />
-
-              {/* <Route
+              <Route
                 exact
-                path="/CheckoutForm"
+                path="/users"
                 element={
-                  <ProtectedRoutes Component={CheckoutForm}>
-                    <CheckoutForm />
+                  <ProtectedRoutes Component={User}>
+                    <User />
                   </ProtectedRoutes>
                 }
-              /> */}
+              />
+              <Route
+                exact
+                path="/EditUsers/:id"
+                element={
+                  <ProtectedRoutes Component={EditUser}>
+                    <EditUser />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/addUser"
+                element={
+                  <ProtectedRoutes Component={AddUser}>
+                    <AddUser />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                exact
+                path="/lead"
+                element={
+                  <ProtectedRoutes Component={Lead}>
+                    <Lead />
+                  </ProtectedRoutes>
+                }
+              />
+
+              <Route
+                exact
+                path="/EditLead"
+                element={
+                  <ProtectedRoutes Component={EditLead}>
+                    <EditLead />
+                  </ProtectedRoutes>
+                }
+              />
+                <Route
+                exact
+                path="/AddLead"
+                element={
+                  <ProtectedRoutes Component={AddLead}>
+                    <AddLead />
+                  </ProtectedRoutes>
+                }
+              />
 
               <Route
                 exact
@@ -339,7 +387,7 @@ function App() {
                 }
               />
 
-              <Route
+              {/* <Route
                 exact
                 path="*"
                 element={
@@ -347,7 +395,7 @@ function App() {
                     <Temp />
                   </ProtectedRoutes>
                 }
-              />
+              /> */}
             </Routes>
           </main>
         </div>

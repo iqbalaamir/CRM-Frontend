@@ -2,7 +2,7 @@ import axios from "axios";
 import { BASE_URL } from "../host";
 
 //admin login
-export const Login = async (data) => {
+export const Signin = async (data) => {
   let config = {
     email: data.email,
     password: data.password,
@@ -20,14 +20,15 @@ export const SignUp = async (data) => {
 };
 
 //Get User
-export const GetUser = async () => {
-  const res = await axios.get(BASE_URL + "users");
-  return res;
-};
-
-//Get leads
-export const GetLeads = async () => {
-  const res = await axios.get(BASE_URL + "leads");
+export const GetUser = async (token) => {
+  const res = await axios.get(`${BASE_URL}users`,{
+  headers:{
+    "x-access-token": token,
+    "Content-Type": "multipart/form-data",
+  }
+  });
+  
+  console.log("res",res);
   return res;
 };
 
@@ -36,29 +37,54 @@ export const GetUserById = async (id) => {
   return await axios.get(BASE_URL + "users/" + id);
 };
 
-//get leads by Id
-export const GetLeadsById = async (id) => {
-  return await axios.get(BASE_URL + "lead/" + id);
-};
-
-//Edit Mentor
-export const EditUser = async (
-  name,
-  email,
-  userStatus
-) => {
-  let formData = new FormData();
-  formData.append("name", name);
-  formData.append("email", email);
-  formData.append("userStatus",userStatus)
-
-  return await axios.put(BASE_URL + "users ", formData, {
+//edit user
+export const EditUser = async (formData) => {
+  return await axios.post(BASE_URL + "users", formData, {
     headers: {
       "x-access-token": `${localStorage.getItem("adminToken")}`,
       "Content-Type": "multipart/form-data",
     },
   });
 };
+
+//create user
+export const CreateUser = async ({ userType, email_id, name,userStatus }) => {
+  const formData = new FormData();
+  formData.append("userType", userType);
+  formData.append("userStatus", userStatus);
+  formData.append("email_id", email_id);
+  formData.append("name", name);
+
+  return await axios.post(BASE_URL + "users/create", formData, {
+    headers: {
+      "x-access-token": `${localStorage.getItem("adminToken")}`,
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
+
+//delete mentor
+export const DeleteUser = async (id) => {
+  return await axios.post(BASE_URL + "user/delete" + id);
+};
+
+
+//Get leads
+export const GetLeads = async () => {
+  const res = await axios.get(BASE_URL + "leads");
+  return res;
+};
+
+
+
+
+//get leads by Id
+export const GetLeadsById = async (id) => {
+  return await axios.get(BASE_URL + "lead/" + id);
+};
+
+
+
 
 //edit mentee
 export const EditMentee = async (formData) => {
@@ -70,10 +96,7 @@ export const EditMentee = async (formData) => {
   });
 };
 
-//delete mentor
-export const DeleteMentor = async (id) => {
-  return await axios.post(BASE_URL + "admin/deleteMentor?id=" + id);
-};
+
 
 //delete mentee
 export const DeleteMentee = async (id) => {
