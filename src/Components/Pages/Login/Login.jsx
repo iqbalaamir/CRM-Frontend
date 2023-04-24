@@ -1,12 +1,14 @@
 import React, { useState, useContext, useEffect } from "react";
 import "./Login.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { AdminLogin } from "../../Services/API/API";
+import { Signin } from "../../Services/API/API";
 import { AuthContext } from "../../Context/Auth/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Button } from "react-bootstrap";
+import LoginPageImage from "../../../assets/LoginPageImage.png";
+import logo from "../../../assets/chirp logo.png";
 import {
   MDBContainer,
   MDBCard,
@@ -17,10 +19,6 @@ import {
   MDBIcon,
   MDBInput,
 } from "mdb-react-ui-kit";
-const LoginPageImage =
-  "https://www.kapturecrm.com/images/crm-info/banner-image.png";
-const logo =
-  "https://media.istockphoto.com/id/1316205005/vector/crm-customer-relationship-management-software-structure-module-workflow-vector-icons.jpg?s=612x612&w=0&k=20&c=o2NspngPWa6R_-vR_5Uuk1wpzReqAGIh98Xx5TxTLl8=";
 
 const Login = () => {
   // const navigate = useNavigate();
@@ -57,16 +55,17 @@ const Login = () => {
     try {
       e.preventDefault();
 
-      let result = await Login(formData);
-
+      let result = await Signin(formData);
+      console.log(result.data, "11111111111111111");
+      // localStorage.setItem("adminToken", result.data.accessToken);
       if (
         result.data.accessToken != null &&
-        result.data.accessToken == undefined
+        result.data.accessToken !== undefined
       ) {
         localStorage.setItem("adminToken", result.data.accessToken);
 
         setTimeout(() => {
-          navigate("/dashboard");
+          navigate("/users");
         }, 3000);
       }
     } catch (error) {
@@ -88,7 +87,7 @@ const Login = () => {
     if (!LoadUser()) {
       navigate("/login");
     } else {
-      navigate("/dashboard");
+      navigate("/users");
     }
   }, []);
 
@@ -113,7 +112,16 @@ const Login = () => {
                   style={{ color: "#ff6219" }}
                 />
                 <span className="h1 fw-bold mb-0">
-                  <img src={logo} className="login_logo"></img>
+                  <h1
+                    style={{
+                      alignItems: "center",
+                      marginLeft: "100px",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    CRM
+                  </h1>
+                  {/* <img src={logo} className="login_logo"></img> */}
                 </span>
               </div>
 
