@@ -34,16 +34,16 @@ const Mentee = () => {
     setAnchorEl(null);
   };
   const [menteeData, setMenteeData] = useState([]);
-  const getData = async () => {
-    try {
-      let result = await GetMentee(localStorage.getItem("adminToken"));
-      setMenteeData(result.data.data);
-      console.log(result.data.data, "menteedata");
-    } catch (e) {}
-  };
-  useEffect(() => {
-    getData();
-  }, []);
+  // const getData = async () => {
+  //   try {
+  //     let result = await GetMentee(localStorage.getItem("adminToken"));
+  //     setMenteeData(result.data.data);
+  //     console.log(result.data.data, "menteedata");
+  //   } catch (e) {}
+  // };
+  // useEffect(() => {
+  //   getData();
+  // }, []);
 
   //implementation of change status api
   const [selectValue, setSelectValue] = React.useState("");
@@ -75,50 +75,50 @@ const Mentee = () => {
     navigate(`/changeMenteePassword/${value}`);
   };
 
-  const removeMentee = async (id) => {
-    const confirmed = window.confirm(
-      "Do you really want to delete this mentee?"
-    );
-    if (!confirmed) return;
+  // const removeMentee = async (id) => {
+  //   const confirmed = window.confirm(
+  //     "Do you really want to delete this mentee?"
+  //   );
+  //   if (!confirmed) return;
 
-    try {
-      const arr = [...id];
-      const result = await DeleteMentee(
-        arr,
-        localStorage.getItem("adminToken")
-      );
-      toast.success("Mentee deleted successfully!", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-      setTimeout(() => {
-        navigate("/mentor");
-      }, 3000);
-    } catch (error) {
-      if (error.response.status == 401) {
-        toast.error("Token expired", {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-      }
-      localStorage.removeItem("adminToken");
-      setTimeout(() => {
-        navigate("/login");
-      }, 3000);
-    }
-  };
+  //   try {
+  //     const arr = [...id];
+  //     const result = await DeleteMentee(
+  //       arr,
+  //       localStorage.getItem("adminToken")
+  //     );
+  //     toast.success("Mentee deleted successfully!", {
+  //       position: "top-right",
+  //       autoClose: 2000,
+  //       hideProgressBar: false,
+  //       closeOnClick: true,
+  //       pauseOnHover: true,
+  //       draggable: true,
+  //       progress: undefined,
+  //       theme: "light",
+  //     });
+  //     setTimeout(() => {
+  //       navigate("/mentor");
+  //     }, 3000);
+  //   } catch (error) {
+  //     if (error.response.status == 401) {
+  //       toast.error("Token expired", {
+  //         position: "top-right",
+  //         autoClose: 2000,
+  //         hideProgressBar: false,
+  //         closeOnClick: true,
+  //         pauseOnHover: true,
+  //         draggable: true,
+  //         progress: undefined,
+  //         theme: "light",
+  //       });
+  //     }
+  //     localStorage.removeItem("adminToken");
+  //     setTimeout(() => {
+  //       navigate("/login");
+  //     }, 3000);
+  //   }
+  // };
 
   const columns: GridColDef[] = useMemo(() => [
     { field: "id", headerName: "ID", width: 100 },
@@ -230,7 +230,9 @@ const Mentee = () => {
                 Edit
               </MenuItem>
               <MenuItem onClick={() => navigateToViewMentee()}>View</MenuItem>
-              <MenuItem onClick={() => removeMentee(userId)}>Delete</MenuItem>
+              <MenuItem 
+              // onClick={() => removeMentee(userId)}
+              >Delete</MenuItem>
             </Menu>
           </div>
         );

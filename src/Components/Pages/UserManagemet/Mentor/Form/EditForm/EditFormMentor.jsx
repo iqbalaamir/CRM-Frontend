@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Header from "../../../../../Header";
 import "./EditFormMentor.css";
-import { EditMentor, GetMentorById } from "../../../../../Services/API/API";
+// import { EditMentor, GetMentorById } from "../../../../../Services/API/API";
 import { useParams, useNavigate } from "react-router-dom";
 import { Col, Row } from "react-bootstrap";
 import Select2 from "react-select2-wrapper";
@@ -16,13 +16,13 @@ const EditFormMentor = () => {
   const [mentorData, setMentorData] = useState();
 
   //implementation of getMentorById
-  useEffect(() => {
-    GetMentorById(id)
-      .then((res) => {
-        setMentorData(res.data.data);
-      })
-      .catch((e) => {});
-  }, []);
+  // useEffect(() => {
+  //   GetMentorById(id)
+  //     .then((res) => {
+  //       setMentorData(res.data.data);
+  //     })
+  //     .catch((e) => {});
+  // }, []);
 
   
   const [formData, setFormData] = useState({
@@ -33,17 +33,17 @@ const EditFormMentor = () => {
 
 
   //edit mentor submit function
-  const handleSubmit = () => {
-    alert(formData.name);
-    EditMentor(formData.name)
-      .then((response) => {
-        console.log("notify", response);
-        // navigate(pathname)
-      })
-      .catch((error) => {
-        // console.log(error, "error");
-      });
-  };
+  // const handleSubmit = () => {
+  //   alert(formData.name);
+  //   EditMentor(formData.name)
+  //     .then((response) => {
+  //       console.log("notify", response);
+  //       // navigate(pathname)
+  //     })
+  //     .catch((error) => {
+  //       // console.log(error, "error");
+  //     });
+  // };
 
   const navigateToMentor = () => {
     navigate("/mentor");
@@ -232,7 +232,7 @@ const EditFormMentor = () => {
               // onClick={(e) => {
               //   onSubmit(e);
               // }}
-              onClick={handleSubmit}
+              // onClick={handleSubmit}
             >
               Submit
             </Button>

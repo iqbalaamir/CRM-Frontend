@@ -3,7 +3,7 @@ import { Box } from "@mui/material";
 import Header from "../../../../Header";
 import "./ViewMentee.css";
 import { Row, Col, Button } from "react-bootstrap";
-import { GetMenteeById } from "../../../../Services/API/API";
+// import { GetMenteeById } from "../../../../Services/API/API";
 import { useParams, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../../../Services/host";
 
@@ -13,17 +13,17 @@ const ViewMentee = () => {
 
   //implementation of getMenteeById
   const [idData, setIdData] = React.useState([]);
-  const getData = async () => {
-    try {
-      let result = await GetMenteeById(id);
-      setIdData(result.data.data);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  useEffect(() => {
-    getData();
-  }, []);
+  // const getData = async () => {
+  //   try {
+  //     let result = await GetMenteeById(id);
+  //     setIdData(result.data.data);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
+  // useEffect(() => {
+  //   getData();
+  // }, []);
 
   const navigateToEditFormMentee = (event) => {
     navigate(`/editformMentee/${id}`);

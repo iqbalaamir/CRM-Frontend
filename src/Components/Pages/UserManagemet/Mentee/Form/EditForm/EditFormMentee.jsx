@@ -12,17 +12,17 @@ const EditFormMentee = () => {
   let { id } = useParams();
   const [idData, setIdData] = React.useState({});
 
-  const getData = async () => {
-    try {
-      let result = await GetMenteeById(id);
-      setIdData(result.data.data);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  useLayoutEffect(() => {
-    getData();
-  }, []);
+  // const getData = async () => {
+  //   try {
+  //     let result = await GetMenteeById(id);
+  //     setIdData(result.data.data);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
+  // useLayoutEffect(() => {
+  //   getData();
+  // }, []);
 
   const onChange = (e) => {
     setIdData({ ...idData, [e.target.name]: e.target.value });
