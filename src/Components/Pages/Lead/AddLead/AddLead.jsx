@@ -4,14 +4,14 @@ import { Button, Form } from "react-bootstrap";
 import Header from "../../../Header";
 import { useNavigate } from "react-router-dom";
 
-import { CreateUser } from "../../../Services/API/API";
+import { CreateLeads } from "../../../Services/API/API";
 import { toast } from "react-toastify";
 
 const AddLead = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [userStatus, setUserStatus] = useState("");
-  const [userType, setUserType] = useState("");
+  const [status, setStatus] = useState("");
+  const [phone, setPhone] = useState("");
   const navigate = useNavigate();
 
   //create category api implementation
@@ -26,17 +26,26 @@ const AddLead = () => {
       toast.error("Please insert Email");
       return;
     }
+    if (!phone) {
+      toast.error("Please insert phone");
+      return;
+    }
+    if (!status) {
+      toast.error("Please insert status");
+      return;
+    }
     try {
-      const formData = new FormData();
-      formData.append("name", name);
-      formData.append("email", email);
-      formData.append("userType", userType);
-      formData.append("userStatus", userStatus);
-  
-      const response = await CreateUser(formData);
-  
-      if (response.status === 200) {
-        toast.success("User added successfully");
+      
+      const response = await CreateLeads({
+        name: name,
+        email: email,
+        phone: phone,
+        status:status
+      });
+      console.log(response)
+      if (response) {
+        toast.success("Leads added successfully");
+        navigate("/lead")
       }
     } catch (error) {
       if (error.response && error.response.status === 409) {
@@ -90,64 +99,34 @@ const AddLead = () => {
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>User Type</Form.Label>
+            <Form.Label>Status</Form.Label>
             <Form.Select
               aria-label="Default select example"
-              value={userStatus}
-              onChange={(e) => setUserStatus(e.target.value)}
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
               className="create_admin_form_control"
             >
               <option>Select options</option>
-              <option value="APPROVED">APPROVED</option>
-              <option value="REJETED">REJETED</option>
-              <option value="PENDING">PENDING</option>
+              <option value="NEW">NEW</option>
+              <option value="LOST">LOST</option>
+              <option value="CONTACTED">CONTACTED</option>
+              <option value="QUALIFIED">QUALIFIED</option>
+              <option value="CANCELED">CANCELED</option>
+              <option value="CONFIRMED">CONFIRMED</option>
             </Form.Select>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>User Type</Form.Label>
-            <Form.Select
-              aria-label="Default select example"
-              value={userType}
-              onChange={(e) => setUserType(e.target.value)}
-              className="create_admin_form_control"
-            >
-              <option>Select options</option>
-              <option value="MANAGER">MANAGER</option>
-              <option value="EMPLOYEE">EMPLOYEE</option>
-            </Form.Select>
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label className="permission_form_lable">Add Permissions:</Form.Label><br/>
-          <Form.Check
-           inline
-            type="checkbox"
-            label="View"
-            // checked={isChecked}
-            // onChange={handleCheckboxChange}
-          />
+            <Form.Label>Phone</Form.Label>
+            <Form.Control
+              type="text"
+              required
+              placeholder="Enter Phone"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
 
-          <Form.Check
-           inline
-            type="checkbox"
-            label="Create"
-            // checked={isChecked}
-            // onChange={handleCheckboxChange}
-          />
-          <Form.Check
-           inline
-            type="checkbox"
-            label="Edit"
-            // checked={isChecked}
-            // onChange={handleCheckboxChange}
-          />
-          <Form.Check
-           inline
-            type="checkbox"
-            label="Delete"
-            // checked={isChecked}
-            // onChange={handleCheckboxChange}
-          />
-        </Form.Group>
+            />
+          </Form.Group>
+          
         </Form>
         <div className="button">
           <Button

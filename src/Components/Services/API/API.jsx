@@ -1,5 +1,7 @@
 import axios from "axios";
 import { BASE_URL } from "../host";
+import FormData from "form-data";
+
 
 //admin login
 export const Signin = async (data) => {
@@ -34,7 +36,13 @@ export const GetUser = async (token) => {
 
 //get user by Id
 export const GetUserById = async (id) => {
-  return await axios.get(BASE_URL + "users/" + id);
+  return await axios.get(BASE_URL + "users/" + id,
+  {
+    headers: {
+      "x-access-token": `${localStorage.getItem("adminToken")}`,
+      "Content-Type": "multipart/form-data",
+    },
+  });
 };
 
 //edit user
@@ -48,20 +56,21 @@ export const EditUser = async (formData) => {
 };
 
 //create user
-export const CreateUser = async ({ userType, email_id, name,userStatus }) => {
-  const formData = new FormData();
-  formData.append("userType", userType);
-  formData.append("userStatus", userStatus);
-  formData.append("email_id", email_id);
-  formData.append("name", name);
-
-  return await axios.post(BASE_URL + "users/create", formData, {
-    headers: {
-      "x-access-token": `${localStorage.getItem("adminToken")}`,
-      "Content-Type": "multipart/form-data",
-    },
-  });
+export const CreateUser = async (formData) => {
+  try {
+    const response = await axios.post(BASE_URL + "users/create", formData, {
+      headers: {
+        "x-access-token": `${localStorage.getItem("adminToken")}`,
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error creating user: ", error);
+    throw error;
+  }
 };
+
 
 //delete mentor
 export const DeleteUser = async (id) => {
@@ -75,8 +84,26 @@ export const GetLeads = async () => {
   return res;
 };
 
-
-
+// Create Leads
+export const CreateLeads = async ({name,email,phone,status}) => {
+  try {
+    const formData = new FormData();
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("phone", phone);
+      formData.append("status", status);
+    const response = await axios.post(BASE_URL + "leads/create", formData, {
+      headers: {
+        "x-access-token": `${localStorage.getItem("adminToken")}`,
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error creating user: ", error);
+    throw error;
+  }
+};
 
 //get leads by Id
 export const GetLeadsById = async (id) => {

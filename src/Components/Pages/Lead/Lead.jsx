@@ -7,7 +7,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import Tooltip from "@mui/material/Tooltip";
 import { useNavigate } from "react-router-dom";
-import { GetUser, DeleteCategory } from "../../Services/API/API";
+import { GetLeads, DeleteCategory } from "../../Services/API/API";
 import { toast } from "react-toastify";
 
 const Lead = () => {
@@ -26,7 +26,7 @@ const Lead = () => {
   //get all admin user api implementation
   const getData = async () => {
     try {
-      let result = await GetUser(localStorage.getItem("adminToken"));
+      let result = await GetLeads(localStorage.getItem("adminToken"));
       setCategoryData(result.data);
       console.log("222222222222222222", result.data);
     } catch (e) {
@@ -91,7 +91,7 @@ const Lead = () => {
   };
 
   const columns = [
-    { field: "userId", headerName: "ID", width: 150 },
+    { field: "_id", headerName: "ID", width: 150 },
     {
       field: "name",
       headerName: "Name",
@@ -105,14 +105,14 @@ const Lead = () => {
       flex: 1,
     },
     {
-      field: "userType",
-      headerName: "User Type",
+      field: "phone",
+      headerName: "Mobile",
       width: 350,
       flex: 1,
     },
     {
-      field: "userStatus",
-      headerName: "User Status",
+      field: "status",
+      headerName: "Status",
       width: 350,
       flex: 1,
     },
@@ -175,7 +175,7 @@ const Lead = () => {
         <DataGrid
           rows={categoryData}
           columns={columns}
-          getRowId={(row) => row.userId}
+          getRowId={(row) => row._id}
           pageSize={pageSize}
           onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
           rowsPerPageOptions={[5, 10, 15]}

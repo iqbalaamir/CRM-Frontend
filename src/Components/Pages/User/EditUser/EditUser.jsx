@@ -73,22 +73,25 @@ const EditUser = () => {
             <Form.Control
               type="text"
               defaultValue={idData?.email}
-              name="category_name"
+              name="email"
               onChange={(e) => onChange(e)}
-              placeholder="Enter name"
+              placeholder="Enter email"
               className="category_form_control"
             />
           </Form.Group>
-          <Form.Group className="mb-3">
+          <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>User Status</Form.Label>
-            <Form.Control
-              type="text"
+            <Form.Select
+              aria-label="Default select example"
               defaultValue={idData?.userStatus}
-              name="category_name"
               onChange={(e) => onChange(e)}
-              placeholder="Enter name"
-              className="category_form_control"
-            />
+              className="create_admin_form_control"
+            >
+              <option>Select options</option>
+              <option value="APPROVED">APPROVED</option>
+              <option value="REJETED">REJETED</option>
+              <option value="PENDING">PENDING</option>
+            </Form.Select>
           </Form.Group>
         </Form>
         <div className="button">
