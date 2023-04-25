@@ -3,8 +3,6 @@ import { BASE_URL } from "../host";
 import FormData from "form-data";
 
 
-
-
 //admin login
 export const Signin = async (data) => {
   let config = {
@@ -58,6 +56,11 @@ export const UpdateUser = async (id,formData) => {
   });
 };
 
+//delete mentor
+export const DeleteUser = async (id) => {
+  return await axios.post(BASE_URL + "user/delete/" + id);
+};
+
 //create user
 export const CreateUser = async (formData) => {
   try {
@@ -76,7 +79,7 @@ export const CreateUser = async (formData) => {
 
 export const UpdateLeads = async (formData) => {
   try {
-    const response = await axios.post(BASE_URL + "leads/update/"+formData._id, formData, {
+    const response = await axios.put(BASE_URL + "leads/update/"+formData._id, formData, {
       headers: {
         "x-access-token": `${localStorage.getItem("adminToken")}`,
         "Content-Type": "multipart/form-data",
@@ -89,11 +92,20 @@ export const UpdateLeads = async (formData) => {
   }
 };
 
-//delete mentor
-export const DeleteUser = async (id) => {
-  return await axios.post(BASE_URL + "user/delete/" + id);
+export const UpdateService = async (id,formData) => {
+  try {
+    const response = await axios.put(BASE_URL + "service/update/"+id, formData, {
+      headers: {
+        "x-access-token": `${localStorage.getItem("adminToken")}`,
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error creating user: ", error);
+    throw error;
+  }
 };
-
 
 //Get leads
 export const GetLeads = async () => {
@@ -105,17 +117,20 @@ export const GetService = async () => {
   const res = await axios.get(BASE_URL + "service");
   return res;
 };
+
 //Get Contact
 export const GetContact = async () => {
   const res = await axios.get(BASE_URL + "contacts");
   return res;
 };
+
 // Create Contact
-export const CreateContact = async ({firstName,lastName,phone,address,createdBy}) => {
+export const CreateContact = async ({firstName,lastName,email,phone,address,createdBy}) => {
   try {
     const formData = new FormData();
       formData.append("firstName", firstName);
       formData.append("lastName", lastName);
+      formData.append("email", email);
       formData.append("phone", phone);
       formData.append("address", address);
       formData.append("createdBy", createdBy);
@@ -131,6 +146,7 @@ export const CreateContact = async ({firstName,lastName,phone,address,createdBy}
     throw error;
   }
 };
+
 // Create Leads
 export const CreateLeads = async ({name,email,phone,status}) => {
   try {
@@ -151,6 +167,7 @@ export const CreateLeads = async ({name,email,phone,status}) => {
     throw error;
   }
 };
+
 // Create Service
 export const CreateService = async ({name,description,status}) => {
   try {
@@ -170,6 +187,7 @@ export const CreateService = async ({name,description,status}) => {
     throw error;
   }
 };
+
 //get leads by Id
 export const GetLeadsById = async (id) => {
   return await axios.get(BASE_URL + "lead/" + id);

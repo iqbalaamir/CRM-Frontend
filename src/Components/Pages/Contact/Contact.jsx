@@ -7,7 +7,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import Tooltip from "@mui/material/Tooltip";
 import { useNavigate } from "react-router-dom";
-import { GetService } from "../../Services/API/API";
+import { GetContact } from "../../Services/API/API";
 import { toast } from "react-toastify";
 
 const Service = () => {
@@ -26,9 +26,8 @@ const Service = () => {
   //get all admin user api implementation
   const getData = async () => {
     try {
-      let result = await GetService(localStorage.getItem("adminToken"));
+      let result = await GetContact(localStorage.getItem("adminToken"));
       setCategoryData(result.data);
-      console.log("222222222222222222", result.data);
     } catch (e) {
       console.log(e);
     }
@@ -83,30 +82,36 @@ const Service = () => {
   //     }
   //   };
 
-  const navigateToAddService = () => {
-    navigate("/AddService");
+  const navigateToAddContact = () => {
+    navigate("/AddContact ");
   };
-  const navigateToEditService = (event, id) => {
-    navigate(`/EditService/${id}`);
+  const navigateToEditContact = (event, id) => {
+    navigate(`/EditContact/${id}`);
   };
 
   const columns = [
     { field: "_id", headerName: "ID", width: 150 },
     {
-      field: "name",
-      headerName: "Name",
+      field: "firstName",
+      headerName: "First Name",
       width: 250,
       flex: 1,
     },
     {
-      field: "description",
-      headerName: "Description",
+      field: "lastName",
+      headerName: "Last Name",
       width: 450,
       flex: 1,
     },
     {
-      field: "status",
-      headerName: "Status",
+      field: "phone",
+      headerName: "Contact number",
+      width: 350,
+      flex: 1,
+    },
+    {
+      field: "address",
+      headerName: "Address",
       width: 350,
       flex: 1,
     },
@@ -122,7 +127,7 @@ const Service = () => {
               <ModeEditIcon
                 className="speciality_edit"
                 sx={{ marginRight: "15px" }}
-                onClick={(event) => navigateToEditService(event, cellValues.id)}
+                onClick={(event) => navigateToEditContact(event, cellValues.id)}
               />
             </Tooltip>
 
@@ -141,10 +146,10 @@ const Service = () => {
   return (
     <Box m="20px">
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Header title="SERVICE" />
+        <Header title="CONTACT" />
         <Box>
           <Button
-            onClick={navigateToAddService}
+            onClick={navigateToAddContact}
             className="add_specialist_button"
             sx={{
               background: "#a4a9fc",
@@ -154,7 +159,7 @@ const Service = () => {
             }}
           >
             <AddIcon sx={{ mr: "10px" }} />
-            ADD SERVICE
+            ADD CONTACT
           </Button>
         </Box>
       </Box>

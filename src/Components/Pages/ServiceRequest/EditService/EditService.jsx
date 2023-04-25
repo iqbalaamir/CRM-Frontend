@@ -4,7 +4,7 @@ import { Button, Form } from "react-bootstrap";
 import Header from "../../../Header";
 import { useParams, useNavigate } from "react-router-dom";
 // import "./Category.css";
-import { GetUserById, UpdateCategory } from "../../../Services/API/API";
+import { GetServiceById, UpdateService } from "../../../Services/API/API";
 
 const EditLead = () => {
   const { id } = useParams();
@@ -13,7 +13,7 @@ const EditLead = () => {
   //get category By ID
 
   useLayoutEffect(() => {
-    GetUserById(id)
+    GetServiceById(id)
       .then((res) => {
         setIdData(res.data);
       })
@@ -33,12 +33,11 @@ const EditLead = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("userId", id);
     formData.append("name", idData?.name ? idData?.name : "");
-    formData.append("email", idData?.email ? idData?.email : "");
-    formData.append("userStatus", idData?.userStatus ? idData?.userStatus : "");
+    formData.append("description", idData?.description ? idData?.description : "");
+    formData.append("status", idData?.status ? idData?.status : "");
 
-    UpdateCategory(formData)
+    UpdateService(idData._id,formData)
       .then((res) => {
         console.log(res.data, "res");
       })
@@ -46,14 +45,14 @@ const EditLead = () => {
   };
 
   const navigate = useNavigate();
-  const navigateToCategory = () => {
-    navigate("/category");
+  const navigateToServiecRequest = () => {
+    navigate("/service");
   };
 
   return (
     <Box m="20px">
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Header title="EDIT USER" />
+        <Header title="EDIT SERVICE REQUEST" />
       </Box>
       <div className="form">
         <Form method="post">
@@ -69,27 +68,35 @@ const EditLead = () => {
             />
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>Email Id</Form.Label>
+            <Form.Label>description</Form.Label>
             <Form.Control
               type="text"
-              defaultValue={idData?.email}
-              name="category_name"
+              defaultValue={idData?.description}
+              name="description"
               onChange={(e) => onChange(e)}
-              placeholder="Enter name"
+              placeholder="Enter description"
               className="category_form_control"
             />
           </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>User Status</Form.Label>
-            <Form.Control
-              type="text"
-              defaultValue={idData?.userStatus}
-              name="category_name"
-              onChange={(e) => onChange(e)}
-              placeholder="Enter name"
-              className="category_form_control"
-            />
-          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formBasicdescription">
+  <Form.Label>Status</Form.Label>
+  <Form.Select
+    aria-label="Select status"
+    value={idData?.status} // Use the "value" prop to set the selected option
+    onChange={(e) => onChange(e.target.value)} // Pass the selected value to the onChange function
+    className="create_admin_form_control"
+  >
+    <option value="">Select an option</option> {/* Add a default option with no value */}
+    <option value="CREATED">CREATED</option>
+    <option value="RELEASED">RELEASED</option>
+    <option value="OPEN">OPEN</option>
+    <option value="CANCELED">CANCELED</option>
+    <option value="IN PROCESS">IN PROCESS</option>
+    <option value="COMPLETED">COMPLETED</option>
+  </Form.Select>
+</Form.Group>
+
         </Form>
         <div className="button">
           <Button
@@ -105,7 +112,7 @@ const EditLead = () => {
             className="speciality_edit_button"
             variant="dark"
             onClick={() => {
-              navigateToCategory();
+              navigateToServiecRequest();
             }}
           >
             Go Back

@@ -58,7 +58,7 @@ const AddService = () => {
   
 
   const navigateToUser = () => {
-    navigate("/users");
+    navigate(-1);
   };
   return (
     <Box m="20px">

@@ -6,22 +6,13 @@ import { ColorModeContext, useMode } from "./theme";
 import Login from "./Components/Pages/Login/Login";
 import Sidebar from "./Components/Constants/Sidebar/Sidebar";
 import Navbar from "./Components/Constants/Navbar/Navbar";
-import Service from "./Components/Pages/ServiceRequest/AddService/AddService";
-import Mentee from "./Components/Pages/UserManagemet/Mentee/Mentee";
 import ProtectedRoutes from "./Components/Protected/ProtectedRoutes";
-import NewFormMentor from "./Components/Pages/UserManagemet/Mentor/Form/NewForm/NewFormMentor";
-import EditFormMentor from "./Components/Pages/UserManagemet/Mentor/Form/EditForm/EditFormMentor";
-import NewFormMentee from "./Components/Pages/UserManagemet/Mentee/Form/NewForm/NewFormMentee";
-import EditFormMentee from "./Components/Pages/UserManagemet/Mentee/Form/EditForm/EditFormMentee";
-import ViewMentor from "./Components/Pages/UserManagemet/Mentor/View/ViewMentor";
-import ViewMentee from "./Components/Pages/UserManagemet/Mentee/View/ViewMentee";
 import ChangePassword from "./Components/Pages/Admin Management/Change Password/changePassword";
 import AdminProfile from "./Components/Pages/Admin Management/Admins Profile/AdminProfile";
 import AdminUser from "./Components/Pages/Admin Management/Admin Add User/AdminUser";
 import EditAdminProfile from "./Components/Pages/Admin Management/Admins Profile/EditAdminProfile";
 import EditAdminUser from "./Components/Pages/Admin Management/Admin Add User/EditAdminUser";
 import CreateAdminUser from "./Components/Pages/Admin Management/Admin Add User/CreateAdminUser";
-import Category from "./Components/Pages/UserManagemet/Category/Category";
 import Specialist from "./Components/Pages/UserManagemet/Specialist/Specialist";
 import AddSpeciality from "./Components/Pages/UserManagemet/Specialist/AddSpeciality";
 import EditSpeciality from "./Components/Pages/UserManagemet/Specialist/EditSpeciality";
@@ -36,6 +27,12 @@ import AddUser from "./Components/Pages/User/AddUser/AddUser";
 import Lead from "./Components/Pages/Lead/Lead";
 import EditLead from "./Components/Pages/Lead/EditLead/EditLead";
 import AddLead from "./Components/Pages/Lead/AddLead/AddLead";
+import Contact from "./Components/Pages/Contact/Contact";
+import Service from "./Components/Pages/ServiceRequest/Service";
+import AddService from "./Components/Pages/ServiceRequest/AddService/AddService";
+import EditService from "./Components/Pages/ServiceRequest/EditService/EditService";
+import AddContact from "./Components/Pages/Contact/AddContact/AddContact";
+import EditContact from "./Components/Pages/Contact/EditContact/EditContact"
 
 function App() {
   let { userId } = useParams();
@@ -44,24 +41,6 @@ function App() {
     "/login",
     "/dashboard",
     "/navbar",
-    // "/mentorAvailability",
-    // "/fullcalendar",
-    // "/myprofile",
-    // "/changepassword",
-    // "/adminAddUser",
-    // "/reports",
-    // "/editAdminProfile",
-    // "/editAdminUser",
-    // "/createAdminUser",
-    // "/changeMentorPassword",
-    // "/changeMenteePassword",
-    // "/specialist",
-    // "/addSpeciality",
-    // "/category",
-    // "/editSpeciality",
-    // "/editCategory",
-    // "/addCategory",
-    // "/addPermissions",
     "/users",
     "/EditUsers",
     "/addUser",
@@ -70,7 +49,10 @@ function App() {
     "/AddLead",
     "/service",
     "/EditService",
-    "/AddService"
+    "/AddService",
+    "/contact",
+    "/AddContact",
+    "/EditContact"
   ];
   const { pathname } = useLocation();
   const [theme, colorMode] = useMode();
@@ -82,15 +64,15 @@ function App() {
         <CssBaseline />
         <div className="app">
           {pathname === "/login" ? null : allPaths.includes(
-            "/" + pathname.split("/")[1]
-          ) === true ? (
+              "/" + pathname.split("/")[1]
+            ) === true ? (
             <Sidebar isSidebar={isSidebar} />
           ) : null}
 
           <main className="content">
             {pathname === "/login" ? null : allPaths.includes(
-              "/" + pathname.split("/")[1]
-            ) === true ? (
+                "/" + pathname.split("/")[1]
+              ) === true ? (
               <Navbar setIsSidebar={setIsSidebar} />
             ) : null}
 
@@ -177,88 +159,55 @@ function App() {
                   </ProtectedRoutes>
                 }
               />
+
               <Route
                 exact
-                path="/mentee"
+                path="/AddService"
                 element={
-                  <ProtectedRoutes Component={Mentee}>
-                    <Mentee />
+                  <ProtectedRoutes Component={AddService}>
+                    <AddService />
                   </ProtectedRoutes>
                 }
               />
               <Route
                 exact
-                path="/newformMentor"
+                path="/EditService/:id"
                 element={
-                  <ProtectedRoutes Component={NewFormMentor}>
-                    <NewFormMentor />
+                  <ProtectedRoutes Component={EditService}>
+                    <EditService />
                   </ProtectedRoutes>
                 }
               />
               <Route
                 exact
-                path="/editformMentor/:id"
+                path="/contact"
                 element={
-                  <ProtectedRoutes Component={EditFormMentor}>
-                    <EditFormMentor />
-                  </ProtectedRoutes>
-                }
-              />
-              <Route
-                exact
-                path="/viewMentor/:id"
-                element={
-                  <ProtectedRoutes Component={ViewMentor}>
-                    <ViewMentor />
+                  <ProtectedRoutes Component={Contact}>
+                    <Contact />
                   </ProtectedRoutes>
                 }
               />
 
               <Route
                 exact
-                path="/newformMentee"
+                path="/AddContact"
                 element={
-                  <ProtectedRoutes Component={NewFormMentee}>
-                    <NewFormMentee />
+                  <ProtectedRoutes Component={AddContact}>
+                    <AddContact />
                   </ProtectedRoutes>
                 }
               />
+
               <Route
                 exact
-                path="/editformMentee/:id"
+                path="/EditContact"
                 element={
-                  <ProtectedRoutes Component={EditFormMentee}>
-                    <EditFormMentee />
+                  <ProtectedRoutes Component={EditContact}>
+                    <EditContact />
                   </ProtectedRoutes>
                 }
               />
-              <Route
-                exact
-                path="/viewMentee/:id"
-                element={
-                  <ProtectedRoutes Component={ViewMentee}>
-                    <ViewMentee />
-                  </ProtectedRoutes>
-                }
-              />
-              <Route
-                exact
-                path="/category"
-                element={
-                  <ProtectedRoutes Component={Category}>
-                    <Category />
-                  </ProtectedRoutes>
-                }
-              />
-              <Route
-                exact
-                path="/addCategory"
-                element={
-                  <ProtectedRoutes Component={AddCategory}>
-                    <AddCategory />
-                  </ProtectedRoutes>
-                }
-              />
+
               <Route
                 exact
                 path="/editCategory/:id"
