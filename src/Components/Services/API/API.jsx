@@ -3,6 +3,8 @@ import { BASE_URL } from "../host";
 import FormData from "form-data";
 
 
+
+
 //admin login
 export const Signin = async (data) => {
   let config = {
@@ -46,8 +48,9 @@ export const GetUserById = async (id) => {
 };
 
 //edit user
-export const EditUser = async (formData) => {
-  return await axios.post(BASE_URL + "users", formData, {
+export const UpdateUser = async (id,formData) => {
+  console.log("eeeeeeeeee",id,formData);
+  return await axios.put(BASE_URL + "users/update/" +id , formData, {
     headers: {
       "x-access-token": `${localStorage.getItem("adminToken")}`,
       "Content-Type": "multipart/form-data",
