@@ -71,10 +71,24 @@ export const CreateUser = async (formData) => {
   }
 };
 
+export const UpdateLeads = async (formData) => {
+  try {
+    const response = await axios.post(BASE_URL + "leads/update/"+formData._id, formData, {
+      headers: {
+        "x-access-token": `${localStorage.getItem("adminToken")}`,
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error creating user: ", error);
+    throw error;
+  }
+};
 
 //delete mentor
 export const DeleteUser = async (id) => {
-  return await axios.post(BASE_URL + "user/delete" + id);
+  return await axios.post(BASE_URL + "user/delete/" + id);
 };
 
 
@@ -83,7 +97,37 @@ export const GetLeads = async () => {
   const res = await axios.get(BASE_URL + "leads");
   return res;
 };
-
+//Get Service
+export const GetService = async () => {
+  const res = await axios.get(BASE_URL + "service");
+  return res;
+};
+//Get Contact
+export const GetContact = async () => {
+  const res = await axios.get(BASE_URL + "contacts");
+  return res;
+};
+// Create Contact
+export const CreateContact = async ({firstName,lastName,phone,address,createdBy}) => {
+  try {
+    const formData = new FormData();
+      formData.append("firstName", firstName);
+      formData.append("lastName", lastName);
+      formData.append("phone", phone);
+      formData.append("address", address);
+      formData.append("createdBy", createdBy);
+    const response = await axios.post(BASE_URL + "contacts/create", formData, {
+      headers: {
+        "x-access-token": `${localStorage.getItem("adminToken")}`,
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error creating user: ", error);
+    throw error;
+  }
+};
 // Create Leads
 export const CreateLeads = async ({name,email,phone,status}) => {
   try {
@@ -104,13 +148,34 @@ export const CreateLeads = async ({name,email,phone,status}) => {
     throw error;
   }
 };
-
+// Create Service
+export const CreateService = async ({name,description,status}) => {
+  try {
+    const formData = new FormData();
+      formData.append("name", name);
+      formData.append("description", description);
+      formData.append("status", status);
+    const response = await axios.post(BASE_URL + "service/create", formData, {
+      headers: {
+        "x-access-token": `${localStorage.getItem("adminToken")}`,
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error creating service: ", error);
+    throw error;
+  }
+};
 //get leads by Id
 export const GetLeadsById = async (id) => {
   return await axios.get(BASE_URL + "lead/" + id);
 };
 
-
+//get service by Id
+export const GetServiceById = async (id) => {
+  return await axios.get(BASE_URL + "service/read/" + id);
+};
 
 
 //edit mentee

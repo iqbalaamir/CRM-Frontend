@@ -6,7 +6,7 @@ import { ColorModeContext, useMode } from "./theme";
 import Login from "./Components/Pages/Login/Login";
 import Sidebar from "./Components/Constants/Sidebar/Sidebar";
 import Navbar from "./Components/Constants/Navbar/Navbar";
-import Mentor from "./Components/Pages/UserManagemet/Mentor/Mentor";
+import Service from "./Components/Pages/ServiceRequest/AddService/AddService";
 import Mentee from "./Components/Pages/UserManagemet/Mentee/Mentee";
 import ProtectedRoutes from "./Components/Protected/ProtectedRoutes";
 import NewFormMentor from "./Components/Pages/UserManagemet/Mentor/Form/NewForm/NewFormMentor";
@@ -44,30 +44,33 @@ function App() {
     "/login",
     "/dashboard",
     "/navbar",
-    "/mentorAvailability",
-    "/fullcalendar",
-    "/myprofile",
-    "/changepassword",
-    "/adminAddUser",
-    "/reports",
-    "/editAdminProfile",
-    "/editAdminUser",
-    "/createAdminUser",
-    "/changeMentorPassword",
-    "/changeMenteePassword",
-    "/specialist",
-    "/addSpeciality",
-    "/category",
-    "/editSpeciality",
-    "/editCategory",
-    "/addCategory",
-    "/addPermissions",
+    // "/mentorAvailability",
+    // "/fullcalendar",
+    // "/myprofile",
+    // "/changepassword",
+    // "/adminAddUser",
+    // "/reports",
+    // "/editAdminProfile",
+    // "/editAdminUser",
+    // "/createAdminUser",
+    // "/changeMentorPassword",
+    // "/changeMenteePassword",
+    // "/specialist",
+    // "/addSpeciality",
+    // "/category",
+    // "/editSpeciality",
+    // "/editCategory",
+    // "/addCategory",
+    // "/addPermissions",
     "/users",
     "/EditUsers",
     "/addUser",
     "/lead",
     "/EditLead",
-    "/AddLead"
+    "/AddLead",
+    "/service",
+    "/EditService",
+    "/AddService"
   ];
   const { pathname } = useLocation();
   const [theme, colorMode] = useMode();
@@ -79,15 +82,15 @@ function App() {
         <CssBaseline />
         <div className="app">
           {pathname === "/login" ? null : allPaths.includes(
-              "/" + pathname.split("/")[1]
-            ) === true ? (
+            "/" + pathname.split("/")[1]
+          ) === true ? (
             <Sidebar isSidebar={isSidebar} />
           ) : null}
 
           <main className="content">
             {pathname === "/login" ? null : allPaths.includes(
-                "/" + pathname.split("/")[1]
-              ) === true ? (
+              "/" + pathname.split("/")[1]
+            ) === true ? (
               <Navbar setIsSidebar={setIsSidebar} />
             ) : null}
 
@@ -155,7 +158,7 @@ function App() {
                   </ProtectedRoutes>
                 }
               />
-                <Route
+              <Route
                 exact
                 path="/AddLead"
                 element={
@@ -167,10 +170,10 @@ function App() {
 
               <Route
                 exact
-                path="/mentor"
+                path="/service"
                 element={
-                  <ProtectedRoutes Component={Mentor}>
-                    <Mentor />
+                  <ProtectedRoutes Component={Service}>
+                    <Service />
                   </ProtectedRoutes>
                 }
               />
