@@ -7,7 +7,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import Tooltip from "@mui/material/Tooltip";
 import { useNavigate } from "react-router-dom";
-import { GetLeads, DeleteCategory } from "../../Services/API/API";
+import { GetLeads, GetUserByToken } from "../../Services/API/API";
 import { toast } from "react-toastify";
 
 const Lead = () => {
@@ -15,6 +15,8 @@ const Lead = () => {
   const [categoryData, setCategoryData] = useState([]);
   const [anchorEl, setAnchorEl] = React.useState();
   const [userId, setUserId] = useState([]);
+  const [userRole, setUserRole] = useState(null);
+  const [editLeads, setEditLeads] = useState(false);
   const [userIdToNavigate, setUserIdToNavigate] = useState();
   const navigate = useNavigate();
 
@@ -33,8 +35,21 @@ const Lead = () => {
       console.log(e);
     }
   };
+  const getUserRole = async () => {
+    try {
+      const response = await GetUserByToken(localStorage.getItem('adminToken'));
+      console.log(response.data.userType, "token User")
+      const role = response.data.userType; // assuming the server returns the user's role as 'role'
+      const leads = response.data.editLeads;
+      setUserRole(role);
+      setEditLeads(leads);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     getData();
+    getUserRole();
   }, []);
 
   //delete category
@@ -122,6 +137,7 @@ const Lead = () => {
       width: "350",
       flex: 1,
       renderCell: (cellValues) => {
+        if (editLeads === true){
         return (
           <div>
             <Tooltip title="Edit">
@@ -135,12 +151,18 @@ const Lead = () => {
             <Tooltip title="Delete">
               <DeleteIcon
                 className="speciality_edit"
-                //   onClick={() => removeCategory(userId)}
+              //   onClick={() => removeCategory(userId)}
               />
             </Tooltip>
           </div>
         );
-      },
+      }
+      else {
+        return <></>; // or any other UI element you want to render for non-admin users
+      }
+      }
+      
+      ,
     },
   ];
 
@@ -148,21 +170,24 @@ const Lead = () => {
     <Box m="20px">
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="LEADS" />
-        <Box>
-          <Button
-            onClick={navigateToAddLead}
-            className="add_specialist_button"
-            sx={{
-              background: "#a4a9fc",
-              fontSize: "14px",
-              fontWeight: "bold",
-              padding: "10px 20px",
-            }}
-          >
-            <AddIcon sx={{ mr: "10px" }} />
-            ADD LEAD
-          </Button>
-        </Box>
+        {userRole === "ADMIN" || userRole === "MANAGER" && (
+          <Box>
+            <Button
+              onClick={navigateToAddLead}
+              className="add_specialist_button"
+              sx={{
+                background: "#a4a9fc",
+                fontSize: "14px",
+                fontWeight: "bold",
+                padding: "10px 20px",
+              }}
+            >
+              <AddIcon sx={{ mr: "10px" }} />
+              ADD LEAD
+            </Button>
+          </Box>
+        )}
+
       </Box>
       <div
         style={{

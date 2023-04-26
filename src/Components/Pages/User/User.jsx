@@ -8,7 +8,7 @@ import AddIcon from "@mui/icons-material/Add";
 import Tooltip from "@mui/material/Tooltip";
 import "./User.css";
 import { useNavigate } from "react-router-dom";
-import { GetUser, DeleteCategory } from "../../Services/API/API";
+import { GetUser, GetUserByToken } from "../../Services/API/API";
 import { toast } from "react-toastify";
 
 const User = () => {
@@ -17,6 +17,8 @@ const User = () => {
   const [anchorEl, setAnchorEl] = React.useState();
   const [userId, setUserId] = useState([]);
   const [userIdToNavigate, setUserIdToNavigate] = useState();
+  const [userRole, setUserRole] = useState(null);
+
   const navigate = useNavigate();
 
   const handleClick = (event, value) => {
@@ -29,13 +31,24 @@ const User = () => {
     try {
       let result = await GetUser(localStorage.getItem("adminToken"));
       setCategoryData(result.data);
-      console.log("222222222222222222", result.data);
     } catch (e) {
       console.log(e);
     }
   };
+  const getUserRole = async () => {
+    try {
+      const response = await GetUserByToken(localStorage.getItem('adminToken'));
+      console.log(response.data.userType,"token User")
+      const role = response.data.userType; // assuming the server returns the user's role as 'role'
+      setUserRole(role);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getData();
+    getUserRole();
   }, []);
 
   //delete category
@@ -123,6 +136,7 @@ const User = () => {
       width: "350",
       flex: 1,
       renderCell: (cellValues) => {
+        if (userRole === "ADMIN"){
         return (
           <div>
             <Tooltip title="Edit">
@@ -141,6 +155,10 @@ const User = () => {
             </Tooltip>
           </div>
         );
+        }
+        else {
+          return <></>; // or any other UI element you want to render for non-admin users
+        }
       },
     },
   ];
@@ -149,21 +167,23 @@ const User = () => {
     <Box m="20px">
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="USERS" />
-        <Box>
-          <Button
-            onClick={navigateToAddUser}
-            className="add_specialist_button"
-            sx={{
-              background: "#a4a9fc",
-              fontSize: "14px",
-              fontWeight: "bold",
-              padding: "10px 20px",
-            }}
-          >
-            <AddIcon sx={{ mr: "10px" }} />
-            ADD USER
-          </Button>
-        </Box>
+        {userRole === "ADMIN" && (
+          <Box>
+            <Button
+              onClick={navigateToAddUser}
+              className="add_specialist_button"
+              sx={{
+                background: "#a4a9fc",
+                fontSize: "14px",
+                fontWeight: "bold",
+                padding: "10px 20px",
+              }}
+            >
+              <AddIcon sx={{ mr: "10px" }} />
+              ADD USER
+            </Button>
+          </Box>
+        )}
       </Box>
       <div
         style={{
@@ -194,6 +214,7 @@ const User = () => {
       </div>
     </Box>
   );
+  
 };
 
 export default User;

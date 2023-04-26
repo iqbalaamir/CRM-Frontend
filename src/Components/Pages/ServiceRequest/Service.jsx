@@ -7,7 +7,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import Tooltip from "@mui/material/Tooltip";
 import { useNavigate } from "react-router-dom";
-import { GetService } from "../../Services/API/API";
+import { GetService,GetUserByToken } from "../../Services/API/API";
 import { toast } from "react-toastify";
 
 const Service = () => {
@@ -15,6 +15,8 @@ const Service = () => {
   const [categoryData, setCategoryData] = useState([]);
   const [anchorEl, setAnchorEl] = React.useState();
   const [userId, setUserId] = useState([]);
+  const [userRole, setUserRole] = useState(null);
+  const [editService, setEditService] = useState(false);
   const [userIdToNavigate, setUserIdToNavigate] = useState();
   const navigate = useNavigate();
 
@@ -33,8 +35,21 @@ const Service = () => {
       console.log(e);
     }
   };
+  const getUserRole = async () => {
+    try {
+      const response = await GetUserByToken(localStorage.getItem('adminToken'));
+      console.log(response.data.userType, "token User")
+      const role = response.data.userType; // assuming the server returns the user's role as 'role'
+      const Service = response.data.editService;
+      setUserRole(role);
+      setEditService(Service);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     getData();
+    getUserRole();
   }, []);
 
   //delete category
@@ -116,24 +131,27 @@ const Service = () => {
       width: "350",
       flex: 1,
       renderCell: (cellValues) => {
-        return (
-          <div>
-            <Tooltip title="Edit">
-              <ModeEditIcon
-                className="speciality_edit"
-                sx={{ marginRight: "15px" }}
-                onClick={(event) => navigateToEditService(event, cellValues.id)}
-              />
-            </Tooltip>
-
-            <Tooltip title="Delete">
-              <DeleteIcon
-                className="speciality_edit"
-                //   onClick={() => removeCategory(userId)}
-              />
-            </Tooltip>
-          </div>
-        );
+        if(editService === true){
+          return (
+            <div>
+              <Tooltip title="Edit">
+                <ModeEditIcon
+                  className="speciality_edit"
+                  sx={{ marginRight: "15px" }}
+                  onClick={(event) => navigateToEditService(event, cellValues.id)}
+                />
+              </Tooltip>
+  
+              <Tooltip title="Delete">
+                <DeleteIcon
+                  className="speciality_edit"
+                  //   onClick={() => removeCategory(userId)}
+                />
+              </Tooltip>
+            </div>
+          );
+        }
+        else{return <></>}
       },
     },
   ];
@@ -142,6 +160,7 @@ const Service = () => {
     <Box m="20px">
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="SERVICE" />
+        {userRole === 'ADMIN' || userRole === 'MANAGER' &&(
         <Box>
           <Button
             onClick={navigateToAddService}
@@ -157,6 +176,7 @@ const Service = () => {
             ADD SERVICE
           </Button>
         </Box>
+        )}
       </Box>
       <div
         style={{

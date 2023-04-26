@@ -7,7 +7,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import Tooltip from "@mui/material/Tooltip";
 import { useNavigate } from "react-router-dom";
-import { GetContact } from "../../Services/API/API";
+import { GetContact,GetUserByToken } from "../../Services/API/API";
 import { toast } from "react-toastify";
 
 const Contact = () => {
@@ -15,6 +15,8 @@ const Contact = () => {
   const [categoryData, setCategoryData] = useState([]);
   const [anchorEl, setAnchorEl] = React.useState();
   const [userId, setUserId] = useState([]);
+  const [userRole, setUserRole] = useState(null);
+  const [editContacts, setEditContacts] = useState(false);
   const [userIdToNavigate, setUserIdToNavigate] = useState();
   const navigate = useNavigate();
 
@@ -32,8 +34,21 @@ const Contact = () => {
       console.log(e);
     }
   };
+  const getUserRole = async () => {
+    try {
+      const response = await GetUserByToken(localStorage.getItem('adminToken'));
+      console.log(response.data.userType, "token User")
+      const role = response.data.userType; // assuming the server returns the user's role as 'role'
+      const Contacts = response.data.editContacts;
+      setUserRole(role);
+      setEditContacts(Contacts);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     getData();
+    getUserRole();
   }, []);
 
   //delete category
@@ -121,6 +136,7 @@ const Contact = () => {
       width: "350",
       flex: 1,
       renderCell: (cellValues) => {
+        if(editContacts === true){
         return (
           <div>
             <Tooltip title="Edit">
@@ -139,6 +155,7 @@ const Contact = () => {
             </Tooltip>
           </div>
         );
+        }else{return <></>}
       },
     },
   ];
@@ -147,7 +164,8 @@ const Contact = () => {
     <Box m="20px">
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="CONTACT" />
-        <Box>
+        {userRole === 'ADMIN' || userRole === 'MANAGER'&&(
+          <Box>
           <Button
             onClick={navigateToAddContact}
             className="add_specialist_button"
@@ -162,6 +180,8 @@ const Contact = () => {
             ADD CONTACT
           </Button>
         </Box>
+        )}
+        
       </Box>
       <div
         style={{

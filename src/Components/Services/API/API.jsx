@@ -27,6 +27,15 @@ export const forgetPassword = async ({email})=>{
   return await axios.post(BASE_URL + "auth/forgot-password",formData);
 }
 
+export const GetUserByToken = async (token) => {
+  const res = await axios.get(BASE_URL+"users/user/getUserByToken",{
+    headers:{
+      "x-access-token": token,
+      "Content-Type": "multipart/form-data",
+    }
+  })
+  return res;
+}
 
 //Get User
 export const GetUser = async (token) => {
