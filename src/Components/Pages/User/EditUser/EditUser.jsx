@@ -51,10 +51,7 @@ const EditUser = () => {
   //create user api implementation
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("rrrrrrrrr", FormData);
-
     const formData = new FormData();
-    console.log("ffff", formData, typeof formData, idData.name);
     formData.append("name", idData?.name ? idData?.name : "");
     formData.append("email", idData?.email ? idData?.email : "");
     formData.append("password", idData?.password ? idData?.password : "");

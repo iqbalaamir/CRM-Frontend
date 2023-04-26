@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { CreateContact } from "../../../Services/API/API";
 import { toast } from "react-toastify";
 
-const AddService = () => {
+const AddContact = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("")
@@ -62,9 +62,6 @@ const AddService = () => {
     }
   };
 
-  const navigateToUser = () => {
-    navigate(-1);
-  };
   return (
     <Box m="20px">
       <Box display="flex" justifyContent="space-between" alignItems="center">
@@ -139,7 +136,7 @@ const AddService = () => {
             className="speciality_edit_button"
             variant="dark"
             onClick={(e) => {
-              navigateToUser();
+              navigate(-1);
             }}
           >
             Go Back
@@ -150,4 +147,4 @@ const AddService = () => {
   );
 };
 
-export default AddService;
+export default AddContact;

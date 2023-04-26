@@ -200,67 +200,10 @@ function App() {
 
               <Route
                 exact
-                path="/EditContact"
+                path="/EditContact/:id"
                 element={
                   <ProtectedRoutes Component={EditContact}>
                     <EditContact />
-                  </ProtectedRoutes>
-                }
-              />
-
-              <Route
-                exact
-                path="/editCategory/:id"
-                element={
-                  <ProtectedRoutes Component={EditCategory}>
-                    <EditCategory />
-                  </ProtectedRoutes>
-                }
-              />
-
-              <Route
-                exact
-                path="/specialist"
-                element={
-                  <ProtectedRoutes Component={Specialist}>
-                    <Specialist />
-                  </ProtectedRoutes>
-                }
-              />
-              <Route
-                exact
-                path="/addSpeciality"
-                element={
-                  <ProtectedRoutes Component={AddSpeciality}>
-                    <AddSpeciality />
-                  </ProtectedRoutes>
-                }
-              />
-              <Route
-                exact
-                path="/editSpeciality"
-                element={
-                  <ProtectedRoutes Component={EditSpeciality}>
-                    <EditSpeciality />
-                  </ProtectedRoutes>
-                }
-              />
-
-              <Route
-                exact
-                path="/myprofile"
-                element={
-                  <ProtectedRoutes Component={AdminProfile}>
-                    <AdminProfile />
-                  </ProtectedRoutes>
-                }
-              />
-              <Route
-                exact
-                path="/editAdminProfile"
-                element={
-                  <ProtectedRoutes Component={EditAdminProfile}>
-                    <EditAdminProfile />
                   </ProtectedRoutes>
                 }
               />
@@ -273,44 +216,6 @@ function App() {
                   </ProtectedRoutes>
                 }
               />
-              <Route
-                exact
-                path="/adminAddUser"
-                element={
-                  <ProtectedRoutes Component={AdminUser}>
-                    <AdminUser />
-                  </ProtectedRoutes>
-                }
-              />
-              <Route
-                exact
-                path="/editAdminUser"
-                element={
-                  <ProtectedRoutes Component={EditAdminUser}>
-                    <EditAdminUser />
-                  </ProtectedRoutes>
-                }
-              />
-              <Route
-                exact
-                path="/createAdminUser"
-                element={
-                  <ProtectedRoutes Component={CreateAdminUser}>
-                    <CreateAdminUser />
-                  </ProtectedRoutes>
-                }
-              />
-
-              <Route
-                exact
-                path="/addPermissions"
-                element={
-                  <ProtectedRoutes Component={AddPermissions}>
-                    <AddPermissions />
-                  </ProtectedRoutes>
-                }
-              />
-
               <Route
                 exact
                 path="/ForgetPassword"

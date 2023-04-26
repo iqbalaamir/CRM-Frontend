@@ -1,61 +1,72 @@
-import React from "react";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import Logo from "../../../../../assets/chirp logo.png";
-import { useNavigate } from "react-router-dom";
+import React,{useState} from "react";
+import { Form, Button, Alert } from 'react-bootstrap';
+import axios from "axios";
+import { useLocation } from 'react-router-dom';
 import "./ForgetPassword.css";
-import EastTwoToneIcon from "@mui/icons-material/EastTwoTone";
 
 const ForgetPassword = () => {
-  const navigate = useNavigate();
-  const navigateToLogin = () => {
-    navigate("/login");
+  const location = useLocation();
+  // const history = useHistory();
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
+  const [successMsg, setSuccessMsg] = useState('');
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const searchParams = new URLSearchParams(location.search);
+    const email = searchParams.get('email');
+    const token = searchParams.get('token');
+
+    if (!password || !confirmPassword) {
+      setErrorMsg('Please enter a password and confirm it');
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setErrorMsg('The passwords do not match');
+      return;
+    }
+
+    try {
+      await axios.post('/api/reset-password', { email, token, password });
+      setSuccessMsg('Your password has been reset successfully');
+    } catch (error) {
+      setErrorMsg('An error occurred while resetting your password');
+    }
   };
 
  
   return (
-    <div className="forgetPassword_card">
-      <div className="logo">
-        <img src={Logo} className="sendMail_logo"></img>
-        <h3 className="heading">Reset Your Password</h3>
-      </div>
-
-      <div className="email_card">
-        <Form>
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Enter OTP:</Form.Label>
-            <Form.Control type="password" placeholder=" Enter your OTP here" />
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>New Password</Form.Label>
-            <Form.Control type="password" placeholder=" New Password" />
-          </Form.Group>
-
-          <Form.Group className="mb-4" controlId="formBasicPassword">
-            <Form.Label>Confirm Password</Form.Label>
-            <Form.Control type="password" placeholder="Confirm Password" />
-          </Form.Group>
-
-          <div style={{marginBottom:"20px",marginTop:"10px"}}>
-           <Button
-              variant="primary"
-              className="reset_password_button"
-              type="submit"
-              // onClick={navigateToResetPasword}
-            >
-              Reset Password
-            </Button>
-           </div>
-
-            <Button onClick={navigateToLogin} className="back_to_login_button">
-              Back To Login
-              <EastTwoToneIcon />
-            </Button>
-        </Form>
-      </div>
+    <div className="reset-password">
+      <h2>Reset Password</h2>
+      {errorMsg && <Alert variant="danger">{errorMsg}</Alert>}
+      {successMsg && <Alert variant="success">{successMsg}</Alert>}
+      <Form onSubmit={handleSubmit}>
+        <Form.Group controlId="password">
+          <Form.Label>New Password</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Enter new password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group controlId="confirmPassword">
+          <Form.Label>Confirm Password</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Confirm new password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Reset Password
+        </Button>
+      </Form>
     </div>
-  );
+    );
 };
 
 export default ForgetPassword;

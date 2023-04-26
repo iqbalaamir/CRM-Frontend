@@ -4,16 +4,16 @@ import { Button, Form } from "react-bootstrap";
 import Header from "../../../Header";
 import { useParams, useNavigate } from "react-router-dom";
 // import "./Category.css";
-import { GetUserById, UpdateCategory } from "../../../Services/API/API";
+import { GetContactById, UpdateContact } from "../../../Services/API/API";
 
-const EditLead = () => {
+const EditContact = () => {
   const { id } = useParams();
   const [idData, setIdData] = React.useState({});
 
   //get category By ID
 
   useLayoutEffect(() => {
-    GetUserById(id)
+    GetContactById(id)
       .then((res) => {
         setIdData(res.data);
       })
@@ -33,60 +33,69 @@ const EditLead = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("userId", id);
     formData.append("name", idData?.name ? idData?.name : "");
     formData.append("email", idData?.email ? idData?.email : "");
     formData.append("userStatus", idData?.userStatus ? idData?.userStatus : "");
 
-    UpdateCategory(formData)
+    UpdateContact(idData?._id,formData)
       .then((res) => {
         console.log(res.data, "res");
+        navigate(-1)
       })
       .catch((err) => {});
   };
 
   const navigate = useNavigate();
-  const navigateToCategory = () => {
-    navigate("/category");
-  };
+
 
   return (
     <Box m="20px">
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Header title="EDIT USER" />
+        <Header title="EDIT CONTACT" />
       </Box>
       <div className="form">
         <Form method="post">
           <Form.Group className="mb-3">
-            <Form.Label>Name</Form.Label>
+            <Form.Label>First Name</Form.Label>
             <Form.Control
               type="text"
-              defaultValue={idData?.name}
-              name="name"
+              defaultValue={idData?.firstName}
+              name="firstName"
               onChange={(e) => onChange(e)}
-              placeholder="Enter name"
+              placeholder="Enter first name"
               className="category_form_control"
             />
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>Email Id</Form.Label>
+            <Form.Label>Last Name</Form.Label>
+            <Form.Control
+              type="text"
+              defaultValue={idData?.lastName}
+              name="lastName"
+              onChange={(e) => onChange(e)}
+              placeholder="Enter last name"
+              className="category_form_control"
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Email</Form.Label>
             <Form.Control
               type="text"
               defaultValue={idData?.email}
-              name="category_name"
+              name="email"
               onChange={(e) => onChange(e)}
-              placeholder="Enter name"
+              placeholder="Enter email"
               className="category_form_control"
             />
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>User Status</Form.Label>
+            <Form.Label>Address</Form.Label>
             <Form.Control
               type="text"
-              defaultValue={idData?.userStatus}
-              name="category_name"
+              defaultValue={idData?.address}
+              name="address"
               onChange={(e) => onChange(e)}
-              placeholder="Enter name"
+              placeholder="Enter Address"
               className="category_form_control"
             />
           </Form.Group>
@@ -105,7 +114,7 @@ const EditLead = () => {
             className="speciality_edit_button"
             variant="dark"
             onClick={() => {
-              navigateToCategory();
+              navigate(-1);
             }}
           >
             Go Back
@@ -116,4 +125,4 @@ const EditLead = () => {
   );
 };
 
-export default EditLead;
+export default EditContact;

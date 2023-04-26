@@ -7,10 +7,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import Tooltip from "@mui/material/Tooltip";
 import { useNavigate } from "react-router-dom";
-import { GetContact } from "../../Services/API/API";
+import { GetService } from "../../Services/API/API";
 import { toast } from "react-toastify";
 
-const Contact = () => {
+const Service = () => {
   const [pageSize, setPageSize] = useState(5);
   const [categoryData, setCategoryData] = useState([]);
   const [anchorEl, setAnchorEl] = React.useState();
@@ -26,8 +26,9 @@ const Contact = () => {
   //get all admin user api implementation
   const getData = async () => {
     try {
-      let result = await GetContact(localStorage.getItem("adminToken"));
+      let result = await GetService(localStorage.getItem("adminToken"));
       setCategoryData(result.data);
+      console.log("222222222222222222", result.data);
     } catch (e) {
       console.log(e);
     }
@@ -82,36 +83,30 @@ const Contact = () => {
   //     }
   //   };
 
-  const navigateToAddContact = () => {
-    navigate("/AddContact ");
+  const navigateToAddService = () => {
+    navigate("/AddService");
   };
-  const navigateToEditContact = (event, id) => {
-    navigate("/EditContact/"+id);
+  const navigateToEditService = (event, id) => {
+    navigate(`/EditService/${id}`);
   };
 
   const columns = [
     { field: "_id", headerName: "ID", width: 150 },
     {
-      field: "firstName",
-      headerName: "First Name",
+      field: "name",
+      headerName: "Name",
       width: 250,
       flex: 1,
     },
     {
-      field: "lastName",
-      headerName: "Last Name",
+      field: "description",
+      headerName: "Description",
       width: 450,
       flex: 1,
     },
     {
-      field: "phone",
-      headerName: "Contact number",
-      width: 350,
-      flex: 1,
-    },
-    {
-      field: "address",
-      headerName: "Address",
+      field: "status",
+      headerName: "Status",
       width: 350,
       flex: 1,
     },
@@ -127,7 +122,7 @@ const Contact = () => {
               <ModeEditIcon
                 className="speciality_edit"
                 sx={{ marginRight: "15px" }}
-                onClick={(event) => navigateToEditContact(event, cellValues.id)}
+                onClick={(event) => navigateToEditService(event, cellValues.id)}
               />
             </Tooltip>
 
@@ -146,10 +141,10 @@ const Contact = () => {
   return (
     <Box m="20px">
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Header title="CONTACT" />
+        <Header title="SERVICE" />
         <Box>
           <Button
-            onClick={navigateToAddContact}
+            onClick={navigateToAddService}
             className="add_specialist_button"
             sx={{
               background: "#a4a9fc",
@@ -159,7 +154,7 @@ const Contact = () => {
             }}
           >
             <AddIcon sx={{ mr: "10px" }} />
-            ADD CONTACT
+            ADD SERVICE
           </Button>
         </Box>
       </Box>
@@ -194,4 +189,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default Service;

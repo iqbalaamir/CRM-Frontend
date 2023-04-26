@@ -21,9 +21,16 @@ export const SignUp = async (data) => {
   return await axios.post(BASE_URL + "auth/signup", config);
 };
 
+export const forgetPassword = async ({email})=>{
+  const formData = new FormData();
+      formData.append("email", email);
+  return await axios.post(BASE_URL + "auth/forgot-password",formData);
+}
+
+
 //Get User
 export const GetUser = async (token) => {
-  const res = await axios.get(`${BASE_URL}users`,{
+  const res = await axios.get(BASE_URL+"users",{
   headers:{
     "x-access-token": token,
     "Content-Type": "multipart/form-data",
@@ -107,6 +114,20 @@ export const UpdateService = async (id,formData) => {
   }
 };
 
+export const UpdateContact = async (id,formData) => {
+  try {
+    const response = await axios.put(BASE_URL + "contacts/update/"+id, formData, {
+      headers: {
+        "x-access-token": `${localStorage.getItem("adminToken")}`,
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error creating contact: ", error);
+    throw error;
+  }
+};
 //Get leads
 export const GetLeads = async () => {
   const res = await axios.get(BASE_URL + "leads");
@@ -120,7 +141,12 @@ export const GetService = async () => {
 
 //Get Contact
 export const GetContact = async () => {
-  const res = await axios.get(BASE_URL + "contacts");
+  const res = await axios.get(BASE_URL + "contacts",{
+    headers: {
+      "x-access-token": `${localStorage.getItem("adminToken")}`,
+      "Content-Type": "multipart/form-data",
+    },
+  });
   return res;
 };
 
@@ -196,6 +222,16 @@ export const GetLeadsById = async (id) => {
 //get service by Id
 export const GetServiceById = async (id) => {
   return await axios.get(BASE_URL + "service/read/" + id);
+};
+
+//get contact by Id
+export const GetContactById = async (id) => {
+  return await axios.get(BASE_URL + "contacts/" + id , {
+    headers: {
+      "x-access-token": `${localStorage.getItem("adminToken")}`,
+      "Content-Type": "multipart/form-data",
+    },
+  });
 };
 
 

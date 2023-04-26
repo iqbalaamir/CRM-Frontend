@@ -6,7 +6,7 @@ import { useParams, useNavigate } from "react-router-dom";
 // import "./Category.css";
 import { GetServiceById, UpdateService } from "../../../Services/API/API";
 
-const EditLead = () => {
+const EditService = () => {
   const { id } = useParams();
   const [idData, setIdData] = React.useState({});
 
@@ -123,4 +123,4 @@ const EditLead = () => {
   );
 };
 
-export default EditLead;
+export default EditService;
