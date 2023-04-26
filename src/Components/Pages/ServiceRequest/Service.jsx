@@ -160,7 +160,7 @@ const Service = () => {
     <Box m="20px">
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="SERVICE" />
-        {userRole === 'ADMIN' || userRole === 'MANAGER' &&(
+        {userRole === 'ADMIN'  &&(
         <Box>
           <Button
             onClick={navigateToAddService}
