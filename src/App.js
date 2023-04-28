@@ -32,7 +32,8 @@ import Service from "./Components/Pages/ServiceRequest/Service";
 import AddService from "./Components/Pages/ServiceRequest/AddService/AddService";
 import EditService from "./Components/Pages/ServiceRequest/EditService/EditService";
 import AddContact from "./Components/Pages/Contact/AddContact/AddContact";
-import EditContact from "./Components/Pages/Contact/EditContact/EditContact"
+import EditContact from "./Components/Pages/Contact/EditContact/EditContact";
+import Dashboard from "./Components/Pages/dashboard";
 
 function App() {
   let { userId } = useParams();
@@ -80,6 +81,11 @@ function App() {
 
             <Routes>
               <Route exact path="/login" element={<Login />} />
+              <Route
+                exact
+                path="/dashboard"
+                element={<Dashboard />}
+              />
               <Route
                 exact
                 path="/forgetPassword"

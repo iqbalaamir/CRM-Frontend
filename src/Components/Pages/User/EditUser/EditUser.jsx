@@ -8,6 +8,10 @@ import { UpdateUser, GetUserById } from "../../../Services/API/API";
 import { toast } from "react-toastify";
 
 const EditUser = () => {
+  const { id } = useParams();
+  const [idData, setIdData] = React.useState({});
+  const navigate = useNavigate();
+
   const [userId, setUserId] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -15,7 +19,7 @@ const EditUser = () => {
   const [userStatus, setUserStatus] = useState("");
   const [userType, setUserType] = useState("");
   const [editLeads, setEditLeads] = useState(false);
-  const [viewLeads, setViewLeads] = useState(false);
+  const [viewLeads, setViewLeads] = useState(!!idData?.viewLeads);
   const [searchLeads, setSearchLeads] = useState(false);
   const [deleteLeads, setDeleteLeads] = useState(false);
   const [editService, setEditService] = useState(false);
@@ -26,13 +30,10 @@ const EditUser = () => {
   const [viewContact, setViewContact] = useState(false);
   const [searchContact, setSearchContact] = useState(false);
   const [deleteContact, setDeleteContact] = useState(false);
+  console.log(viewLeads,idData.viewLeads)
   const handleChange = (name, setValue) => {
     setValue((prevState) => !prevState);
   };
-  const { id } = useParams();
-  const [idData, setIdData] = React.useState({});
-  const navigate = useNavigate();
-
   //getUser By ID
   useLayoutEffect(() => {
     GetUserById(id)
@@ -105,6 +106,7 @@ const EditUser = () => {
     UpdateUser(idData._id, formData)
       .then((res) => {
         console.log(res.data, "res");
+        navigate(-1)
       })
       .catch((err) => {});
   };
@@ -157,19 +159,20 @@ const EditUser = () => {
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>User Status</Form.Label>
             <Form.Select
+              value={idData?.userStatus}
               aria-label="Default select example"
               // onChange={(e) => setUserStatus(e.target.value)}
               onChange={(e) => onChange(e)}
               className="create_admin_form_control"
             >
               <option>Select options</option>
-              <option value="APPROVED" selected={idData?.userStatus}>
+              <option value="APPROVED" >
                 APPROVED
               </option>
-              <option value="REJETED" selected={idData?.userStatus}>
-                REJETED
+              <option value="REJECTED" >
+                REJECTED
               </option>
-              <option value="PENDING" selected={idData?.userStatus}>
+              <option value="PENDING" >
                 PENDING
               </option>
             </Form.Select>
@@ -178,17 +181,18 @@ const EditUser = () => {
             <Form.Label>User Type</Form.Label>
             <Form.Select
               aria-label="Default select example"
-              // value={userType}
-              // defaultValue={idData?.userType}
-              // onChange={(e) => setUserType(e.target.value)}
+              value={idData?.userType}
               onChange={(e) => onChange(e)}
               className="create_admin_form_control"
             >
               <option>Select options</option>
-              <option value="MANAGER" selected={idData?.userType}>
+              <option value="ADMIN">
+                ADMIN
+              </option>
+              <option value="MANAGER">
                 MANAGER
               </option>
-              <option value="EMPLOYEE" selected={idData?.userType}>
+              <option value="EMPLOYEE">
                 EMPLOYEE
               </option>
             </Form.Select>
@@ -212,8 +216,7 @@ const EditUser = () => {
               name="viewLeads"
               type="checkbox"
               label="View Leads"
-              checked={idData?.viewLeads}
-              // onChange={(e) => onChange(e)}
+              checked={viewLeads}
               onChange={() => handleChange("viewLeads", setViewLeads)}
             />
             <Form.Check

@@ -93,7 +93,8 @@ const Sidebar = () => {
                 alt="profile-user"
                 width="130px"
                 height="100px"
-                src={logo}
+                src="https://www.clutch.com/wp-content/uploads/2018/05/CRM-Mag-Logo.png"
+                
                 // style={{ cursor: "pointer", borderRadius: "50%" }}
               />
               {/* </Box> */}

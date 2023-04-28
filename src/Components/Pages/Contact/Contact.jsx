@@ -16,7 +16,7 @@ const Contact = () => {
   const [anchorEl, setAnchorEl] = React.useState();
   const [userId, setUserId] = useState([]);
   const [userRole, setUserRole] = useState(null);
-  const [editContacts, setEditContacts] = useState(false);
+  const [editContact, seteditContact] = useState(false);
   const [userIdToNavigate, setUserIdToNavigate] = useState();
   const navigate = useNavigate();
 
@@ -39,9 +39,9 @@ const Contact = () => {
       const response = await GetUserByToken(localStorage.getItem('adminToken'));
       console.log(response.data.userType, "token User")
       const role = response.data.userType; // assuming the server returns the user's role as 'role'
-      const Contacts = response.data.editContacts;
+      const Contacts = response.data.editContact;
       setUserRole(role);
-      setEditContacts(Contacts);
+      seteditContact(Contacts);
     } catch (error) {
       console.log(error);
     }
@@ -136,7 +136,7 @@ const Contact = () => {
       width: "350",
       flex: 1,
       renderCell: (cellValues) => {
-        if(editContacts === true){
+        if(editContact === true){
         return (
           <div>
             <Tooltip title="Edit">
