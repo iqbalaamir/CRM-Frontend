@@ -1,6 +1,6 @@
 {
-  "name": "admin_dashboard",
-  "homepage": "http://chirpvet.com/",
+  "name": "crm_dashboard",
+  "homepage": "https://crm-guvi.netlify.app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
