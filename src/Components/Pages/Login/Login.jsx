@@ -121,7 +121,8 @@ const Login = () => {
                   >
                     CRM
                   </h1>
-                  {/* <img src={logo} className="login_logo"></img> */}
+                  <p><b>Admin Email: </b>admin@gmail.com</p>
+                  <p><b>Admin Password: </b>admin123!</p>
                 </span>
               </div>
 
